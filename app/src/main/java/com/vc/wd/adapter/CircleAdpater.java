@@ -44,6 +44,8 @@ public class CircleAdpater extends WDRecyclerAdapter<Circle> {
         b.gridView.addItemDecoration(new SpacingItemDecoration(space));
         b.gridView.setLayoutManager(gridLayoutManager);
         b.gridView.setAdapter(imageAdapter);
+
+        //由于没有自定义holder，需要灵活使用复杂对象binding寄存
         b.setVariable(BR.imageAdapter,imageAdapter);
         b.setVariable(BR.layoutManager,gridLayoutManager);
     }
@@ -51,6 +53,9 @@ public class CircleAdpater extends WDRecyclerAdapter<Circle> {
     @Override
     protected void bindView(ViewDataBinding binding,Circle circle, int position) {
         CircleItemBinding b = (CircleItemBinding) binding;
+        //不建议调用binding.setVariable()，
+        // 由于xml暂时不包含时间计算，不能进行列表嵌套处理等复杂操作，
+        // 所以尽量不要给自己增加难度，像下面这样写代码会让你略去xml中填充值碰到不必要的麻烦
         b.image.setImageURI(Uri.parse(circle.getHeadPic()));
         b.nickname.setText(circle.getNickName());
         try {
