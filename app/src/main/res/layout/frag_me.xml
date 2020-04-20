@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="vm"
+            type="com.vc.wd.vm.MainViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/me_bg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:minHeight="150dp" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:id="@+id/line1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="140dp"
+                    android:background="@drawable/my_card_bg"
+                    android:orientation="vertical"
+                    android:paddingBottom="50dp">
+
+                    <TextView
+                        android:id="@+id/me_nickname"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="60dp"
+                        android:gravity="center"
+                        android:text="名字"
+                        android:textColor="@color/commdity_text_color"
+                        android:textSize="14sp" />
+
+                    <RelativeLayout
+                        android:id="@+id/me_info"
+                        android:layout_width="match_parent"
+                        android:layout_height="24dp"
+                        android:layout_marginLeft="24dp"
+                        android:layout_marginTop="70dp"
+                        android:layout_marginRight="24dp">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_alignParentLeft="true"
+                            android:src="@drawable/my_icon_information_n" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="44dp"
+                            android:text="个人资料"
+                            android:textColor="@color/commdity_text_color"
+                            android:textSize="14sp" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginLeft="44dp"
+                            android:background="#ededed" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/me_circle"
+                        android:layout_width="match_parent"
+                        android:layout_height="24dp"
+                        android:layout_marginLeft="24dp"
+                        android:layout_marginTop="25dp"
+                        android:layout_marginRight="24dp">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_alignParentLeft="true"
+                            android:src="@drawable/my_icon_circle_n" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="44dp"
+                            android:text="我的圈子"
+                            android:textColor="@color/commdity_text_color"
+                            android:textSize="14sp" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginLeft="44dp"
+                            android:background="#ededed" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/me_foot"
+                        android:layout_width="match_parent"
+                        android:layout_height="24dp"
+                        android:layout_marginLeft="24dp"
+                        android:layout_marginTop="25dp"
+                        android:layout_marginRight="24dp">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_alignParentLeft="true"
+                            android:src="@drawable/my_icon_foot_n" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="44dp"
+                            android:text="我的足迹"
+                            android:textColor="@color/commdity_text_color"
+                            android:textSize="14sp" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginLeft="44dp"
+                            android:background="#ededed" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/me_wallet"
+                        android:layout_width="match_parent"
+                        android:layout_height="24dp"
+                        android:layout_marginLeft="24dp"
+                        android:layout_marginTop="25dp"
+                        android:layout_marginRight="24dp">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_alignParentLeft="true"
+                            android:src="@drawable/my_icon_wallet_n" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="44dp"
+                            android:text="我的钱包"
+                            android:textColor="@color/commdity_text_color"
+                            android:textSize="14sp" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginLeft="44dp"
+                            android:background="#ededed" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/me_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="24dp"
+                        android:layout_marginLeft="24dp"
+                        android:layout_marginTop="25dp"
+                        android:layout_marginRight="24dp">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_alignParentLeft="true"
+                            android:src="@drawable/my_icon_address_n" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="44dp"
+                            android:text="我的收货地址"
+                            android:textColor="@color/commdity_text_color"
+                            android:textSize="14sp" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginLeft="44dp"
+                            android:background="#ededed" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/me_setting"
+                        android:layout_width="match_parent"
+                        android:layout_height="24dp"
+                        android:layout_marginLeft="24dp"
+                        android:layout_marginTop="25dp"
+                        android:onClick="@{()->vm.setting()}"
+                        android:layout_marginRight="24dp">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_alignParentLeft="true"
+                            android:src="@drawable/my_icon_wallet_n" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="44dp"
+                            android:text="设置"
+                            android:textColor="@color/commdity_text_color"
+                            android:textSize="14sp" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginLeft="44dp"
+                            android:background="#ededed" />
+
+                    </RelativeLayout>
+
+                    <Button
+                        android:id="@+id/logout_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="@dimen/dip_20"
+                        android:layout_marginRight="30dp"
+                        android:onClick="@{()->vm.logout()}"
+                        android:background="@android:color/holo_red_light"
+                        android:text="退出登录"
+                        android:textColor="@android:color/white" />
+
+                </LinearLayout>
+
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/me_avatar"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_alignTop="@+id/line1"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="-40dp"
+                    fresco:roundAsCircle="true" />
+
+            </RelativeLayout>
+        </ScrollView>
+
+    </RelativeLayout>
+</layout>

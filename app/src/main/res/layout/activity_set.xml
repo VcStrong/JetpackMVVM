@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="vm"
+            type="com.vc.wd.vm.SetViewModel" />
+    </data>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/title_bar"
+            android:layout_width="match_parent"
+            android:background="@android:color/white"
+            android:layout_height="50dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/commdity_text_color"
+                android:textSize="18sp"
+                android:layout_centerInParent="true"
+                android:text="设置" />
+        </RelativeLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="@dimen/dip_20"
+            android:layout_marginRight="30dp"
+            android:onClick="@{()->vm.logout()}"
+            android:background="@android:color/holo_red_light"
+            android:text="退出登录"
+            android:textColor="@android:color/white" />
+
+    </LinearLayout>
+</layout>

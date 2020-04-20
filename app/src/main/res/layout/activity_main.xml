@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="vm"
+            type="com.vc.wd.vm.MainViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="54dp"
+            android:layout_alignParentTop="true"
+            android:layout_above="@+id/bottom_menu"
+            android:layout_alignParentBottom="true">
+
+        </FrameLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true" />
+
+        <RadioGroup
+            android:id="@+id/bottom_menu"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/rectangle"
+            android:onCheckedChanged="@{vm::onCheckedChanged}"
+            android:layout_height="90dp">
+
+            <RadioButton
+                android:id="@+id/home_btn"
+                android:checked="true"
+                style="@style/main_bottom_btn_style"
+                android:drawableTop="@drawable/common_tab_btn_home" />
+
+            <RadioButton
+                android:id="@+id/circle_btn"
+                style="@style/main_bottom_btn_style"
+                android:drawableTop="@drawable/common_tab_btn_circle" />
+
+            <RadioButton
+                android:id="@+id/cart_btn"
+                style="@style/main_bottom_btn_style"
+                android:layout_marginTop="10dp"
+                android:drawableTop="@drawable/common_tab_btn_shop_cart_n" />
+
+            <RadioButton
+                android:id="@+id/list_btn"
+                style="@style/main_bottom_btn_style"
+                android:drawableTop="@drawable/common_tab_btn_list" />
+
+            <RadioButton
+                android:id="@+id/me_btn"
+                style="@style/main_bottom_btn_style"
+                android:drawableTop="@drawable/common_tab_btn_my" />
+        </RadioGroup>
+
+    </RelativeLayout>
+</layout>

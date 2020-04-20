@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="vm"
+            type="com.vc.wd.vm.AddCircleViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/topic_add_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:minHeight="600dp">
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout1"
+            style="@style/title_bar_style">
+
+            <ImageView
+                style="@style/back_btn_style"
+                android:onClick="@{()->vm.finish()}"
+                android:src="@drawable/btn_close" />
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="圈圈"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:id="@+id/send"
+                style="@style/btn_ok_style"
+                android:src="@drawable/btn_send" />
+        </RelativeLayout>
+
+
+        <EditText
+            android:id="@+id/bo_text"
+            android:layout_width="fill_parent"
+            android:layout_height="100dp"
+            android:layout_below="@+id/relativeLayout1"
+            android:layout_alignParentLeft="true"
+            android:background="@android:color/transparent"
+            android:gravity="center"
+            android:hint="心情如何..."
+            android:maxLength="140"
+            android:padding="15dp"
+            android:text="@={vm.content}"
+            android:textColor="@color/commdity_text_color"
+            android:textColorHint="@color/commdity_text_color"
+            android:textSize="16sp"></EditText>
+
+        <!--<ImageView-->
+        <!--android:id="@+id/bo_image"-->
+        <!--android:layout_width="80dp"-->
+        <!--android:layout_height="80dp"-->
+        <!--android:layout_below="@+id/bo_text"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_margin="15dp"-->
+        <!--android:src="@drawable/mask_01" />-->
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/bo_image_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/bo_text"
+            android:layout_alignParentLeft="true"></androidx.recyclerview.widget.RecyclerView>
+
+        <TextView
+            android:id="@+id/bo_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/bo_image_list"
+            android:layout_alignParentLeft="true"
+            android:layout_margin="15dp"
+            android:gravity="center_vertical"
+            android:text="定位中.."
+            android:textColor="@color/commdity_text_color"
+            android:textSize="12sp" />
+
+    </RelativeLayout>
+</layout>
