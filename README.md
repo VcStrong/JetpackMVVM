@@ -40,12 +40,11 @@ kotlin版mvp参见：https://github.com/VcStrong/KotlinMVPDemo.git<br/>
 
 
 ## 2.mvvm-v2 质量的提高来自不断地追求
-v2版本计划在v1基础上进行组件化升级<br/>
-由于对组件和模块的概念有了更深的了解，参考了网上的组件化教程，实践总结利弊之后，决定自己写一套优秀高效率的组件运行gradle；<br/>
-1.公司场景：多模块业务联调，统一运行。<br/>
-2.本组件化打包好处：根据gradle配置动态改变模块的引入，分分钟能解决一个模块或者多个模块打包联调
-3.具体方式如下：
- 1.项目根目录新建了config.gradle存放系统变量；<br/>
-2.项目根目录build.gradle动态改变app（module）对模块的引入；<br/>
-3.所有选中的模块可根据自己要求看看是否需要改变AndroidManifest.xml的引入，仿照open_main模块中的sourceSets;<br/>
-注：请认真查看config.gradle中的变量备注<br/>
+v2版本计划在v1基础上进行组件化升级，由于对组件和模块的概念有了更深的了解，参考了网上的组件化教程，实践总结利弊之后，决定自己写一套优秀高效率的组件运行gradle：
+- 公司场景：多模块业务联调，统一运行；
+- 此demo种组件化打包好处：根据gradle配置动态改变模块的引入，分分钟能解决一个模块或者多个模块打包联调；
+- 具体方式如下：
+    1. 项目根目录新建了config.gradle存放系统变量；
+    2. 项目根目录build.gradle动态改变app（module）对模块的引入；
+    3. 所有选中的模块可根据自己要求看看是否需要改变AndroidManifest.xml的引入，仿照open_main模块中的sourceSets；
+> 注：请认真查看config.gradle中的变量备注
