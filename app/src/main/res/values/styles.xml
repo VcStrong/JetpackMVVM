@@ -1,64 +1,11 @@
 <resources>
+
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-    </style>
-
-    <style name="main_bottom_btn_style">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:padding">10dp</item>
-        <item name="android:layout_weight">1</item>
-        <item name="android:layout_marginTop">40dp</item>
-        <item name="android:button">@null</item>
-    </style>
-
-    <style name="My_CheckBox" parent="@android:style/Widget.Material.CompoundButton.CheckBox">
-        <item name="android:colorControlActivated">@android:color/white</item>
-        <item name="android:colorControlNormal">@android:color/white</item>
-    </style>
-
-    <!-- 返回按钮样式 -->
-    <style name="back_btn_style">
-        <item name="android:layout_width">48dp</item>
-        <item name="android:layout_height">48dp</item>
-        <item name="android:layout_alignParentBottom">true</item>
-        <item name="android:layout_alignParentLeft">true</item>
-        <item name="android:layout_alignParentTop">true</item>
-        <item name="android:layout_centerVertical">true</item>
-        <item name="android:padding">13dp</item>
-        <item name="android:layout_marginLeft">4dp</item>
-    </style>
-    <!-- 确定按钮样式 -->
-    <style name="btn_ok_style">
-        <item name="android:layout_width">48dp</item>
-        <item name="android:layout_height">48dp</item>
-        <item name="android:layout_alignParentRight">true</item>
-        <item name="android:layout_centerVertical">true</item>
-        <item name="android:padding">13dp</item>
-        <item name="android:layout_marginLeft">7dp</item>
-        <item name="android:layout_marginRight">7dp</item>
-    </style>
-    <!-- 标题栏字体样式 -->
-    <style name="title_font_style">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_centerVertical">true</item>
-        <item name="android:layout_toRightOf">@+id/back</item>
-        <item name="android:textColor">@color/commdity_text_color</item>
-        <item name="android:singleLine">true</item>
-        <item name="android:textSize">18sp</item>
-    </style>
-    <!-- 标题样式 -->
-    <style name="title_bar_style">
-        <item name="android:layout_width">fill_parent</item>
-        <item name="android:layout_height">48dp</item>
-        <item name="android:layout_alignParentLeft">true</item>
-        <item name="android:layout_alignParentTop">true</item>
-        <item name="android:background">@android:color/white</item>
     </style>
 
 </resources>

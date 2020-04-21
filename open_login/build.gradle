@@ -1,11 +1,10 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 
 android {
-    signingConfigs {
-    }
+    compileSdkVersion 28
+
     compileSdkVersion projectConfig.compileSdkVersion
     defaultConfig {
-        applicationId projectConfig.applicationId
         minSdkVersion projectConfig.minSdkVersion
         targetSdkVersion projectConfig.targetSdkVersion
         versionCode projectConfig.versionCode
@@ -17,24 +16,34 @@ android {
             }
         }
     }
+
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
     dataBinding{
         enabled = true
     }
+
+    sourceSets {
+        main {
+            //组件化与继承模式使用不同的AndroidManifest文件
+            if (!allPackage) {
+                manifest.srcFile 'src/test/AndroidManifest.xml'
+            }
+        }
+    }
     compileOptions {
         sourceCompatibility = 1.8
         targetCompatibility = 1.8
     }
-    lintOptions {
-        abortOnError false
-    }
+
 }
 
 dependencies {
-
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    annotationProcessor 'com.alibaba:arouter-compiler:1.2.1'
+    api project(path: ':common')
 }

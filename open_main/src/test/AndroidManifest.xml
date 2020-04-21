@@ -1,0 +1,14 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.vc.wd.main" >
+    <application>
+        <activity android:name="com.vc.wd.main.activity.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.vc.wd.main.activity.SetActivity"/>
+        <activity android:name="com.vc.wd.main.activity.AddCircleActivity"/>
+    </application>
+</manifest>

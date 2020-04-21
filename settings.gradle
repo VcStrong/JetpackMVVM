@@ -1,2 +1,5 @@
 include ':app'
 rootProject.name='JetpackMVVM'
+include ':common'
+include ':open_login'
+include ':open_main'

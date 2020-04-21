@@ -13,21 +13,21 @@
         android:supportsRtl="true"
         android:networkSecurityConfig="@xml/network_security_config"
         android:requestLegacyExternalStorage="true"
-        android:name="com.vc.wd.core.WDApplication"
+        android:name="com.vc.wd.common.core.WDApplication"
         android:theme="@style/AppTheme">
-        <activity android:name="com.vc.wd.activity.LoginActivity">
+        <activity android:name="com.vc.wd.login.activity.LoginActivity">
         </activity>
-        <activity android:name="com.vc.wd.activity.WelcomeActivity">
+        <activity android:name="com.vc.wd.login.activity.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.vc.wd.activity.RegisterActivity"/>
-        <activity android:name="com.vc.wd.activity.MainActivity"/>
-        <activity android:name="com.vc.wd.activity.SetActivity"/>
-        <activity android:name="com.vc.wd.activity.AddCircleActivity"/>
+        <activity android:name="com.vc.wd.login.activity.RegisterActivity"/>
+        <activity android:name="com.vc.wd.main.activity.MainActivity"/>
+        <activity android:name="com.vc.wd.main.activity.SetActivity"/>
+        <activity android:name="com.vc.wd.main.activity.AddCircleActivity"/>
     </application>
 
 </manifest>
