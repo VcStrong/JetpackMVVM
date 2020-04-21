@@ -8,6 +8,7 @@ java版mvp参见：https://github.com/VcStrong/RxRetrofitMVPDemo.git<br/>
 kotlin版mvp参见：https://github.com/VcStrong/KotlinMVPDemo.git<br/>
 
 ## 1.mvvm-v1 2020.04.20
+这是一个整合架构，所有功能开发都只能在一个module中
 
 ### 1.1 业务功能包含以下：
 - 登录注册（跳转主页后关闭，已登录用户可直接进入主页）;
@@ -36,3 +37,6 @@ kotlin版mvp参见：https://github.com/VcStrong/KotlinMVPDemo.git<br/>
 - RxPmissions：权限申请比较好用
 - Arouter：页面路由
 
+
+## 2.mvvm-v2
+v2版本计划在v1基础上进行组件化升级，不过目前v1版本并没有达到很高的集成标准，所以暂时主要工作放在对v1架构的思考和改进上。
