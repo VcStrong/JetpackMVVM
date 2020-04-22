@@ -1,49 +1,14 @@
-apply plugin: 'com.android.library'
+apply from: '../module.gradle'
 
 android {
-    compileSdkVersion 28
 
-    compileSdkVersion projectConfig.compileSdkVersion
-    defaultConfig {
-        minSdkVersion projectConfig.minSdkVersion
-        targetSdkVersion projectConfig.targetSdkVersion
-        versionCode projectConfig.versionCode
-        versionName projectConfig.versionName
-
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments = [AROUTER_MODULE_NAME: project.getName()]
-            }
-        }
-    }
-
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-    }
-    dataBinding{
-        enabled = true
-    }
-
+    //组件化运行和总包运行建议使用不同的AndroidManifest文件；
+    //如果使用默认的AndroidManifest.xml，则去掉下面代码
     sourceSets {
         main {
-            //组件化与继承模式使用不同的AndroidManifest文件
             if (!allPackage) {
                 manifest.srcFile 'src/test/AndroidManifest.xml'
             }
         }
     }
-    compileOptions {
-        sourceCompatibility = 1.8
-        targetCompatibility = 1.8
-    }
-}
-
-dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-
-    annotationProcessor 'com.alibaba:arouter-compiler:1.2.1'
-    api project(path: ':common')
 }

@@ -15,19 +15,6 @@
         android:requestLegacyExternalStorage="true"
         android:name="com.vc.wd.common.core.WDApplication"
         android:theme="@style/AppTheme">
-        <activity android:name="com.vc.wd.login.activity.LoginActivity">
-        </activity>
-        <activity android:name="com.vc.wd.login.activity.WelcomeActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name="com.vc.wd.login.activity.RegisterActivity"/>
-        <activity android:name="com.vc.wd.main.activity.MainActivity"/>
-        <activity android:name="com.vc.wd.main.activity.SetActivity"/>
-        <activity android:name="com.vc.wd.main.activity.AddCircleActivity"/>
     </application>
 
 </manifest>
