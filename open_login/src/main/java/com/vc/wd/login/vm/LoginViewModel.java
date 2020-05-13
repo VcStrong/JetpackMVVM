@@ -57,7 +57,7 @@ public class LoginViewModel extends WDViewModel<IAppRequest> {
         }
         dialog.setValue(true);
 
-        request(iRequest.login(m, MD5Utils.md5(p)), new DataCall<UserInfo>() {
+        request(iRequest.login(m, p), new DataCall<UserInfo>() {
             @Override
             public void success(UserInfo result) {
                 dialog.setValue(false);
@@ -73,5 +73,9 @@ public class LoginViewModel extends WDViewModel<IAppRequest> {
                 UIUtils.showToastSafe(e.getCode() + " " + e.getDisplayMessage());
             }
         });
+    }
+
+    public void register(){
+        intentByRouter(Constant.ACTIVITY_URL_REGISTER);
     }
 }

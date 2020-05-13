@@ -27,10 +27,21 @@ import retrofit2.http.Query;
  */
 public interface IAppRequest {
 
+    /**
+     *
+     * @param m
+     * @param p 密码规则是数字加字母超过8位即可
+     * @return
+     */
     @FormUrlEncoded
     @POST("user/v1/register")
     Observable<Result> register(@Field("phone") String m, @Field("pwd") String p);
 
+    /**
+     * @param m
+     * @param p 密码规则是数字加字母超过8位即可
+     * @return
+     */
     @FormUrlEncoded
     @POST("user/v1/login")
     Observable<Result<UserInfo>> login(@Field("phone") String m, @Field("pwd") String p);
