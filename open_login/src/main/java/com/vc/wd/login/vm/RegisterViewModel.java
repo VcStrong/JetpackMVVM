@@ -14,7 +14,6 @@ import com.vc.wd.common.util.MD5Utils;
 import com.vc.wd.common.util.UIUtils;
 
 public class RegisterViewModel extends WDViewModel<IAppRequest> {
-    public ObservableField<Boolean> remPas = new ObservableField<>();
     public ObservableField<String> mobile = new ObservableField<>();
     public ObservableField<String> pas = new ObservableField<>();
     public MutableLiveData<Boolean> pasVis = new MutableLiveData<>();
@@ -34,13 +33,9 @@ public class RegisterViewModel extends WDViewModel<IAppRequest> {
             UIUtils.showToastSafe("请输入密码");
             return;
         }
-        if (remPas.get()) {
-            WDApplication.getShare().edit().putString("mobile", m)
-                    .putString("pas", p).commit();
-        }
         dialog.setValue(true);
 
-        request(iRequest.register(m, MD5Utils.md5(p)), new DataCall<Void>() {
+        request(iRequest.register(m, p), new DataCall<Void>() {
 
             @Override
             public void success(Void data) {

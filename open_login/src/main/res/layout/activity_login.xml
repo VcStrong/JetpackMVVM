@@ -120,6 +120,7 @@
                     android:layout_centerVertical="true"
                     android:textColor="@android:color/white"
                     android:textSize="14sp"
+                    android:onClick="@{() -> vm.register()}"
                     android:text="快速注册" />
             </RelativeLayout>
         </LinearLayout>
