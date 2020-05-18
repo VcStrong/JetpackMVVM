@@ -48,4 +48,5 @@ v2版本计划在v1基础上进行组件化升级，由于对组件和模块的�
     2. 项目根目录新建了module.gradle存放业务module中build.gradle公用参数，common和app不建议引入(部分重要配置必须写在这两个module中);
     3. 项目根目录build.gradle使用groovy动态改变app（module）对模块的引入；
     4. 所有选中的模块可根据自己要求，决定是否需要改变AndroidManifest.xml的引入，仿照open_main模块中的sourceSets；
+    5. 支持多个Module—Application共存，方便处理推送，IM等组件初始化问题
 > 注：请认真查看config.gradle中的变量备注
