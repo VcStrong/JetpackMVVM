@@ -8,6 +8,9 @@
 java版mvp参见：https://github.com/VcStrong/RxRetrofitMVPDemo.git<br/>
 kotlin版mvp参见：https://github.com/VcStrong/KotlinMVPDemo.git<br/>
 
+> 注册的密码规则是数字加字母超过8位即可
+> 测试账号：13126965106 密码：111111aa
+
 ## 1.mvvm-v1 2020.04.20
 这是一个整合架构，所有功能开发都只能在一个module中
 
