@@ -21,11 +21,6 @@ import com.vc.wd.main.vm.MainViewModel;
 
 import java.util.List;
 
-/**
- * @author dingtao
- * @date 2019/1/2 10:28
- * qq:1940870847
- */
 public class CircleFragment extends WDFragment<MainViewModel, FragCircleBinding> implements XRecyclerView.LoadingListener, CircleAdpater.GreatListener {
 
     public static boolean addCircle;//如果添加成功，则为true

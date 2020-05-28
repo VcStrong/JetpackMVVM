@@ -11,14 +11,12 @@ import com.vc.wd.common.bean.shop.HomeList;
 import com.vc.wd.common.core.DataCall;
 import com.vc.wd.common.core.WDViewModel;
 import com.vc.wd.common.core.exception.ApiException;
-import com.vc.wd.common.core.http.IAppRequest;
-import com.vc.wd.main.fragment.HomeFragment;
 import com.vc.wd.common.util.Constant;
-import com.zhouwei.mzbanner.holder.MZHolderCreator;
+import com.vc.wd.main.request.IMainRequest;
 
 import java.util.List;
 
-public class MainViewModel extends WDViewModel<IAppRequest> {
+public class MainViewModel extends WDViewModel<IMainRequest> {
     public MutableLiveData<Integer> cId = new MutableLiveData<>();
     public MutableLiveData<List<Banner>> bannerData = new MutableLiveData<>();
     public MutableLiveData<HomeList> homeListData = new MutableLiveData<>();

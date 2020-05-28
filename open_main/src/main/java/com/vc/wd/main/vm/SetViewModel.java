@@ -4,10 +4,10 @@ import android.content.Intent;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.vc.wd.common.core.WDViewModel;
-import com.vc.wd.common.core.http.IAppRequest;
 import com.vc.wd.common.util.Constant;
+import com.vc.wd.main.request.IMainRequest;
 
-public class SetViewModel extends WDViewModel<IAppRequest> {
+public class SetViewModel extends WDViewModel<IMainRequest> {
 
     public void logout(){
         userInfoBox.remove(LOGIN_USER);

@@ -20,11 +20,6 @@ import com.vc.wd.main.databinding.HotItemBinding;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author dingtao
- * @date 2019/1/2 15:52
- * qq:1940870847
- */
 public class CommodityAdpater extends WDRecyclerAdapter<Commodity> {
 
     public static final int HOT_TYPE = 0;

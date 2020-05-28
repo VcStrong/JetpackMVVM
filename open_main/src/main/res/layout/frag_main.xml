@@ -46,12 +46,10 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <com.zhouwei.mzbanner.MZBannerView
+                <com.youth.banner.Banner
                     android:id="@+id/banner"
                     android:layout_width="match_parent"
-                    android:layout_height="164dp"
-                    app:canLoop="true"
-                    app:open_mz_mode="true" />
+                    android:layout_height="164dp"/>
 
                 <RelativeLayout
                     android:layout_width="match_parent"

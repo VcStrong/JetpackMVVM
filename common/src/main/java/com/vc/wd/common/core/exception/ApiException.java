@@ -11,9 +11,10 @@ import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 
 /**
- * @author dingtao
- * @date 2019/1/2 7:01 PM
- * 封装了自定义的异常，页面拿着我的异常做出友好提示
+ * desc 封装了自定义的异常，页面拿着我的异常做出友好提示
+ * author VcStrong
+ * github VcStrong
+ * date 2019/1/2 7:01 PM
  */
 public class ApiException extends Exception {
     private String code;//

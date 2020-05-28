@@ -22,7 +22,12 @@ import java.lang.reflect.ParameterizedType;
 
 import io.objectbox.Box;
 
-
+/**
+ * desc
+ * author VcStrong
+ * github VcStrong
+ * date 2020/5/28 1:42 PM
+ */
 public abstract class WDFragment<VM extends WDViewModel,VDB extends ViewDataBinding> extends Fragment {
 
 	protected VM viewModel;

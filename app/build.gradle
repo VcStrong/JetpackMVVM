@@ -3,19 +3,28 @@ apply plugin: 'com.android.application'
 android {
     signingConfigs {
     }
-    compileSdkVersion projectConfig.compileSdkVersion
+    compileSdkVersion SDK_VERSION.compileSdkVersion
     defaultConfig {
-        applicationId projectConfig.applicationId
-        minSdkVersion projectConfig.minSdkVersion
-        targetSdkVersion projectConfig.targetSdkVersion
-        versionCode projectConfig.versionCode
-        versionName projectConfig.versionName
+        applicationId active.applicationId
+        minSdkVersion SDK_VERSION.minSdkVersion
+        targetSdkVersion SDK_VERSION.targetSdkVersion
+        versionCode active.versionCode
+        versionName active.versionName
+
+        //上面注释
+        manifestPlaceholders = [
+                appName : active.appName
+        ]
 
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments = [AROUTER_MODULE_NAME: project.getName()]
             }
         }
+
+        // Enabling multidex support.
+        multiDexEnabled true
+        multiDexKeepProguard file('maindex-keep.pro')
     }
     buildTypes {
         release {

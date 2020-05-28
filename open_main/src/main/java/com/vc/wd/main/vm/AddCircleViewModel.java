@@ -1,13 +1,12 @@
 package com.vc.wd.main.vm;
 
 import androidx.databinding.ObservableField;
-import androidx.lifecycle.MutableLiveData;
 
 import com.vc.wd.common.core.DataCall;
 import com.vc.wd.common.core.WDViewModel;
 import com.vc.wd.common.core.exception.ApiException;
-import com.vc.wd.common.core.http.IAppRequest;
 import com.vc.wd.common.util.UIUtils;
+import com.vc.wd.main.request.IMainRequest;
 
 import java.io.File;
 import java.util.List;
@@ -16,7 +15,7 @@ import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 
-public class AddCircleViewModel extends WDViewModel<IAppRequest> {
+public class AddCircleViewModel extends WDViewModel<IMainRequest> {
 
     public ObservableField<String> content = new ObservableField<>();
 

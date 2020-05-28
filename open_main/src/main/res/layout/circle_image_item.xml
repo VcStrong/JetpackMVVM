@@ -1,19 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <data>
-    </data>
+    <data></data>
 
-    <LinearLayout
-        android:orientation="vertical"
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/circle_image"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <com.facebook.drawee.view.SimpleDraweeView
-            android:id="@+id/circle_image"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="80dp"
-            android:adjustViewBounds="true" />
-    </LinearLayout>
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:minHeight="80dp" />
 </layout>

@@ -7,11 +7,6 @@ import com.vc.wd.common.core.WDFragment;
 import com.vc.wd.main.databinding.FragMeBinding;
 import com.vc.wd.main.vm.MainViewModel;
 
-/**
- * @author dingtao
- * @date 2019/1/2 10:28
- * qq:1940870847
- */
 public class MeFragment extends WDFragment<MainViewModel, FragMeBinding> {
 
     @Override

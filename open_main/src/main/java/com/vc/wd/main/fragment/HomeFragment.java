@@ -1,41 +1,25 @@
 package com.vc.wd.main.fragment;
 
-import android.content.Context;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-
-import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.facebook.drawee.view.SimpleDraweeView;
 import com.vc.wd.main.R;
 import com.vc.wd.main.adapter.CommodityAdpater;
 import com.vc.wd.common.bean.Banner;
 import com.vc.wd.common.bean.shop.HomeList;
 import com.vc.wd.common.core.WDFragment;
-import com.vc.wd.main.databinding.BannerItemBinding;
+import com.vc.wd.main.adapter.HomeBannerAdapter;
 import com.vc.wd.main.databinding.FragMainBinding;
 import com.vc.wd.common.util.recycleview.SpacingItemDecoration;
 import com.vc.wd.main.vm.MainViewModel;
-import com.zhouwei.mzbanner.MZBannerView;
-import com.zhouwei.mzbanner.holder.MZHolderCreator;
-import com.zhouwei.mzbanner.holder.MZViewHolder;
 
+import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author dingtao
- * @date 2019/1/2 10:28
- * qq:1940870847
- */
 public class HomeFragment extends WDFragment<MainViewModel, FragMainBinding> {
 
     private CommodityAdpater mHotAdapter, mFashionAdapter, mLifeAdapter;
+    private HomeBannerAdapter mBannerAdapter;
 
     @Override
     protected int getLayoutId() {
@@ -62,18 +46,16 @@ public class HomeFragment extends WDFragment<MainViewModel, FragMainBinding> {
         binding.fashionList.setAdapter(mFashionAdapter);
         binding.lifeList.setAdapter(mLifeAdapter);
 
+        mBannerAdapter = new HomeBannerAdapter(new ArrayList<Banner>());
+        binding.banner.setAdapter(mBannerAdapter)
+                .addBannerLifecycleObserver(this)
+                .setDelayTime(3000)
+                .setBannerGalleryMZ(20);
+
         viewModel.bannerData.observe(this, new Observer<List<Banner>>() {
             @Override
             public void onChanged(List<Banner> banners) {
-                binding.banner.setIndicatorVisible(false);
-                binding.banner.setDuration(3000);
-                binding.banner.setPages(banners, new MZHolderCreator<HomeFragment.BannerViewHolder>() {
-                    @Override
-                    public HomeFragment.BannerViewHolder createViewHolder() {
-                        return new HomeFragment.BannerViewHolder();
-                    }
-                });
-                binding.banner.start();
+                mBannerAdapter.updateData(banners);
             }
         });
 
@@ -91,29 +73,14 @@ public class HomeFragment extends WDFragment<MainViewModel, FragMainBinding> {
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
-        binding.banner.pause();
+    public void onResume() {
+        super.onResume();
+        binding.banner.start();
     }
 
-    /**
-     * @author dingtao
-     * @date 2019/1/3 9:21 AM
-     * banner
-     */
-    class BannerViewHolder implements MZViewHolder<Banner> {
-        BannerItemBinding bannerItemBinding;
-        @Override
-        public View createView(Context context) {
-            // 返回页面布局
-            bannerItemBinding = DataBindingUtil.inflate(LayoutInflater.from(context),R.layout.banner_item,null,false);
-            return bannerItemBinding.getRoot();
-        }
-
-        @Override
-        public void onBind(Context context, int position, Banner data) {
-            // 数据绑定
-            bannerItemBinding.bannerImage.setImageURI(Uri.parse(data.getImageUrl()));
-        }
+    @Override
+    public void onPause() {
+        super.onPause();
+        binding.banner.stop();
     }
 }

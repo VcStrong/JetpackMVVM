@@ -20,11 +20,6 @@ import com.vc.wd.common.util.Constant;
 import com.vc.wd.common.util.StringUtils;
 import com.vc.wd.main.vm.AddCircleViewModel;
 
-/**
- * @author dingtao
- * @date 2019/1/11 00:22
- * qq:1940870847
- */
 @Route(path = Constant.ACTIVITY_URL_ADD_CIRCLE)
 public class AddCircleActivity extends WDActivity<AddCircleViewModel, ActivityAddCircleBinding> {
 

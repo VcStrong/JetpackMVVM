@@ -2,17 +2,20 @@ apply plugin: 'com.android.library'
 
 android {
 
-    compileSdkVersion projectConfig.compileSdkVersion
+    compileSdkVersion SDK_VERSION.compileSdkVersion
     defaultConfig {
-        minSdkVersion projectConfig.minSdkVersion
-        targetSdkVersion projectConfig.targetSdkVersion
-        versionCode projectConfig.versionCode
-        versionName projectConfig.versionName
+        minSdkVersion SDK_VERSION.minSdkVersion
+        targetSdkVersion SDK_VERSION.targetSdkVersion
+        versionCode active.versionCode
+        versionName active.versionName
 
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments = [AROUTER_MODULE_NAME: project.getName()]
             }
+        }
+        ndk {
+            abiFilters 'armeabi', 'armeabi-v7a'
         }
     }
 

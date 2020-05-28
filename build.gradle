@@ -35,6 +35,9 @@ def modules = getSubprojects()
 // app 是主工程模块名
 project('app') { p ->
     p.afterEvaluate {
+        println "==============================================================="
+        println "打包分支："+active.branch + "  包名：" +active.applicationId + "  版本：" + active.versionName
+        println "==============================================================="
         modules.each() { module ->
             if (allPackage){//所有模块都打包
                 if (module != p) {

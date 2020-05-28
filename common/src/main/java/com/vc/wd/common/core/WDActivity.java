@@ -26,9 +26,10 @@ import java.lang.reflect.ParameterizedType;
 
 
 /**
- * @author dingtao
- * @date 2018/12/29 14:00
- * qq:1940870847
+ * desc
+ * author VcStrong
+ * github VcStrong
+ * date 2020/5/28 1:42 PM
  */
 public abstract class WDActivity<VM extends WDViewModel,VDB extends ViewDataBinding> extends AppCompatActivity {
 

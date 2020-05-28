@@ -20,11 +20,6 @@ import java.text.ParseException;
 import java.util.Arrays;
 import java.util.Date;
 
-/**
- * @author dingtao
- * @date 2019/1/2 15:52
- * qq:1940870847
- */
 public class CircleAdpater extends WDRecyclerAdapter<Circle> {
 
     @Override
