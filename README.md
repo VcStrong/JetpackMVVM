@@ -65,4 +65,7 @@ v3版本绝对让你眼前一新，重新提起兴致，追求适配到4.x，由
 主要目的提升研发-测试-运维运营等部门沟通协作；
 - 新增今日头条-<a href="https://github.com/bytedance/BoostMultiDex.git">抖音团队multidex打包</a>，适配4.x平台加载dex问题，详细请参照WDApplication代码；
 - 拆分请求接口，放到各个相关module中，开发阶段尽量减少多人操作common包。
-- @TODO Arouter使用的Path从common包的Constant中拿出来，每个项目单独配置，最后通过gradle合并
+ 
+
+
+>>>>>> @TODO 新想法（我有时间了在继续开发，这阵子先不忙这一块了，v3版本已经很丰满了）：Arouter使用的Path从common包的Constant中拿出来，每个项目单独配置（初步想法是通过插件搞定，难点是每个组件的的常量取出来然后合并）
