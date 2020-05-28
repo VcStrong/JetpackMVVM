@@ -4,14 +4,12 @@ import android.os.Handler;
 import android.os.Message;
 
 import androidx.databinding.ObservableField;
-import androidx.lifecycle.Lifecycle;
-import androidx.lifecycle.OnLifecycleEvent;
 
 import com.vc.wd.common.core.WDViewModel;
-import com.vc.wd.common.core.http.IAppRequest;
 import com.vc.wd.common.util.Constant;
+import com.vc.wd.login.request.ILoginRequest;
 
-public class WelcomeViewModel extends WDViewModel<IAppRequest> {
+public class WelcomeViewModel extends WDViewModel<ILoginRequest> {
     public ObservableField<String> seekText = new ObservableField<>();
     private int count = 3;
 

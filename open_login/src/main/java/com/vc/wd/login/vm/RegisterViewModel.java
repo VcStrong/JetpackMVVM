@@ -6,14 +6,12 @@ import androidx.databinding.ObservableField;
 import androidx.lifecycle.MutableLiveData;
 
 import com.vc.wd.common.core.DataCall;
-import com.vc.wd.common.core.WDApplication;
 import com.vc.wd.common.core.WDViewModel;
 import com.vc.wd.common.core.exception.ApiException;
-import com.vc.wd.common.core.http.IAppRequest;
-import com.vc.wd.common.util.MD5Utils;
 import com.vc.wd.common.util.UIUtils;
+import com.vc.wd.login.request.ILoginRequest;
 
-public class RegisterViewModel extends WDViewModel<IAppRequest> {
+public class RegisterViewModel extends WDViewModel<ILoginRequest> {
     public ObservableField<String> mobile = new ObservableField<>();
     public ObservableField<String> pas = new ObservableField<>();
     public MutableLiveData<Boolean> pasVis = new MutableLiveData<>();

@@ -1,9 +1,10 @@
 package com.vc.wd.common.bean;
 
 /**
- * @author dingtao
- * @date 2019/1/2 15:00
- * qq:1940870847
+ * desc
+ * author VcStrong
+ * github VcStrong
+ * date 2020/5/28 1:42 PM
  */
 public class Banner {
     String imageUrl;

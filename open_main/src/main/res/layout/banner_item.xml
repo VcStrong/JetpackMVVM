@@ -1,19 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto">
 
-    <data>
-    </data>
+    <data></data>
 
-    <LinearLayout
-        android:orientation="vertical"
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/banner_image"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <com.facebook.drawee.view.SimpleDraweeView
-            android:id="@+id/banner_image"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="4dp"
-            android:layout_marginRight="4dp" />
-    </LinearLayout>
+        android:layout_height="match_parent"
+        fresco:roundedCornerRadius="10dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp" />
 </layout>

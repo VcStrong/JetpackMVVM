@@ -1,24 +1,20 @@
 package com.vc.wd.login.vm;
 
 import android.text.TextUtils;
-import android.text.method.HideReturnsTransformationMethod;
-import android.text.method.PasswordTransformationMethod;
 
 import androidx.databinding.ObservableField;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Observer;
 
 import com.vc.wd.common.bean.UserInfo;
 import com.vc.wd.common.core.DataCall;
 import com.vc.wd.common.core.WDApplication;
 import com.vc.wd.common.core.WDViewModel;
 import com.vc.wd.common.core.exception.ApiException;
-import com.vc.wd.common.core.http.IAppRequest;
 import com.vc.wd.common.util.Constant;
-import com.vc.wd.common.util.MD5Utils;
 import com.vc.wd.common.util.UIUtils;
+import com.vc.wd.login.request.ILoginRequest;
 
-public class LoginViewModel extends WDViewModel<IAppRequest> {
+public class LoginViewModel extends WDViewModel<ILoginRequest> {
 
     public ObservableField<Boolean> remPas = new ObservableField<>();
     public ObservableField<String> mobile = new ObservableField<>();

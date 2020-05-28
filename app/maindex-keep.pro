@@ -1,0 +1,1 @@
+-keep class com.vc.wd.common.core.WDApplication

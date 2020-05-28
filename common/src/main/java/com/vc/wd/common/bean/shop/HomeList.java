@@ -1,9 +1,10 @@
 package com.vc.wd.common.bean.shop;
 
 /**
- * @author dingtao
- * @date 2019/1/3 10:58
- * qq:1940870847
+ * desc
+ * author VcStrong
+ * github VcStrong
+ * date 2020/5/28 1:42 PM
  */
 public class HomeList {
     CommodityList rxxp;

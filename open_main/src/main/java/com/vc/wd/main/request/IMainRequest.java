@@ -1,4 +1,4 @@
-package com.vc.wd.common.core.http;
+package com.vc.wd.main.request;
 
 import com.vc.wd.common.bean.Banner;
 import com.vc.wd.common.bean.Circle;
@@ -21,30 +21,12 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 /**
- * @author dingtao
- * @date 2018/12/28 10:00
- * qq:1940870847
- */
-public interface IAppRequest {
-
-    /**
-     *
-     * @param m
-     * @param p 密码规则是数字加字母超过8位即可
-     * @return
-     */
-    @FormUrlEncoded
-    @POST("user/v1/register")
-    Observable<Result> register(@Field("phone") String m, @Field("pwd") String p);
-
-    /**
-     * @param m
-     * @param p 密码规则是数字加字母超过8位即可
-     * @return
-     */
-    @FormUrlEncoded
-    @POST("user/v1/login")
-    Observable<Result<UserInfo>> login(@Field("phone") String m, @Field("pwd") String p);
+  * desc
+  * author VcStrong
+  * github VcStrong
+  * date 2020/5/28 1:42 PM
+  */
+public interface IMainRequest {
 
     /**
      * banner
@@ -69,16 +51,6 @@ public interface IAppRequest {
             @Query("count") int count);
 
     /**
-     * 圈子
-     */
-    @FormUrlEncoded
-    @POST("user/findCircle/{uid}")
-    Observable<Result<List<Circle>>> findCircle(
-            @Path("uid") int uid,
-            @Field("page") int page,
-            @Field("count") int count);
-
-    /**
      * 圈子点赞
      */
     @FormUrlEncoded
@@ -87,25 +59,6 @@ public interface IAppRequest {
             @Header("userId") long userId,
             @Header("sessionId") String sessionId,
             @Field("circleId") long circleId);
-
-    /**
-     * 我的足迹
-     */
-    @GET("commodity/verify/v1/browseList")
-    Observable<Result<List<Banner>>> browseList(
-            @Header("userId") String userId,
-            @Header("sessionId") String sessionId,
-            @Query("page") int page,
-            @Query("count") int count);
-
-    /**
-     * 同步购物车数据
-     */
-    @PUT("order/verify/v1/syncShoppingCart")
-    Observable<Result> syncShoppingCart(
-            @Header("userId") String userId,
-            @Header("sessionId") String sessionId,
-            @Body String data);
 
     /**
      * 发布圈子

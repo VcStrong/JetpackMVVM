@@ -1,15 +1,59 @@
 ext {
+
+    //开发-分支
+    dev = [
+            branch : "dev",
+            applicationId    : "com.vc.wd.dev",
+            versionCode      : 2,
+            versionName      : "2.1dev",
+            appName : "商城dev",
+            serverUrl : "http://mobile.bwstudent.com/small/",
+            baiduUrl : "http://www.baidu.com/api/v2/"
+//            im_key : "1111kkkkkk",
+//            push_key : "1111ppppp"
+    ]
+
+    //测试-分支
+    beta = [
+            branch : "beta",
+            applicationId    : "com.vc.wd.beta",
+            versionCode      : 2,
+            versionName      : "2.1beta",
+            appName : "商城beta",
+            serverUrl : "http://mobile.bwstudent.com/small/",
+            baiduUrl : "http://www.baidu.com/api/v2/"
+//            im_key : "2222kkkkkk",
+//            push_key : "2222ppppp"
+    ]
+
+    //发布版上线-分支
+    release = [
+            branch : "release",
+            applicationId    : "com.vc.wd",
+            versionCode      : 1,
+            versionName      : "1.0",
+            appName : "商城release",
+            serverUrl : "http://mobile.bwstudent.com/small/",
+            baiduUrl : "http://www.baidu.com/api/v1/"
+//            im_key : "3333kkkkkk",
+//            push_key : "3333ppppp"
+    ]
+
+    //①方便自定义各种常量，统一项目中配置输出
+    //②方便后续接入即时通讯、推送等服务之后，不同分支使用不同的第三方api_key，防止开发或者测试阶段发送"test"这样的推送消息造成A类事故
+    //根据项目阶段自行改变（dev,beta,release），方便各部门协作，减少沟通成本
+    //千万不要错误的认成build.gradle中debug和release，上面只是项目各阶段的配置，和apk打包互不影响。
+    active = release
+
+    //建议用来记录不会因为发布分支改变的参数
+    SDK_VERSION = [
+            compileSdkVersion: 29,
+            minSdkVersion    : 15,//4.0.3
+            targetSdkVersion : 29
+    ]
+
     //全部都打包，如果只运行模块，请改为false；true则所有模块都参与打包
     allPackage = true
     //需要运行的组件，当allPackage为false的时候，此变量生效，模块名参照settings.gradle中的
     needPackage = ["open_main","open_login"]
-    projectConfig = [
-            applicationId    : "com.vc.wd",
-            compileSdkVersion: 29,
-            minSdkVersion    : 21,
-            targetSdkVersion : 29,
-            versionCode      : 1,
-            versionName      : "1.0"
-    ]
-
 }

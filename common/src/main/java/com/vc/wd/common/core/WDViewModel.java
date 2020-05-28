@@ -1,12 +1,9 @@
 package com.vc.wd.common.core;
 
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.OnLifecycleEvent;
 import androidx.lifecycle.ViewModel;
@@ -30,15 +27,12 @@ import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 /**
-  * @Package:        com.vc.wd.common.core
-  * @ClassName:      WDViewModel
-  * @Description:    每个Activity对应一个viewmodel，又或者多个Fragment同Activity共享一个viewmodel，负责拿到model(请求网络或者封装)，通过Livedata完成页面数据更新
-  * @Author:         yintao
-  * @CreateDate:     2020/4/20 11:50 PM
-  * @UpdateDate:     2020/4/20 11:50 PM
-  * @UpdateRemark:   更新说明
-  * @Version:        1.0
-  */
+ * desc 每个Activity对应一个viewmodel，又或者多个Fragment同Activity共享一个viewmodel，
+ *      负责拿到model(请求网络或者封装)，通过Livedata完成页面数据更新
+ * author VcStrong
+ * github VcStrong
+ * date 2020/5/28 1:42 PM
+ */
 public abstract class WDViewModel<R> extends ViewModel implements LifecycleObserver {
 
     public final static int REQUEST_TYPE_DEFAULT = 0;//默认IRquest

@@ -12,6 +12,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * desc
+ * author VcStrong
+ * github VcStrong
+ * date 2020/5/28 1:42 PM
+ */
 public abstract class WDRecyclerAdapter<T> extends RecyclerView.Adapter<WDRecyclerAdapter.MyHodler> {
 
     protected List<T> mList = new ArrayList<>();

@@ -5,22 +5,26 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.bytedance.boost_multidex.BoostMultiDex;
+import com.bytedance.boost_multidex.Result;
 import com.facebook.common.internal.Supplier;
 import com.facebook.common.util.ByteConstants;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.imagepipeline.cache.MemoryCacheParams;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
 import com.vc.wd.common.bean.MyObjectBox;
-import com.vc.wd.common.core.http.IWDApplication;
 
 import io.objectbox.BoxStore;
 
 
 /**
- * @name: MyApplication
- * @remark:
+ * desc
+ * author VcStrong
+ * github VcStrong
+ * date 2020/5/28 1:42 PM
  */
 public class WDApplication extends Application {
     /**
@@ -51,6 +55,24 @@ public class WDApplication extends Application {
     private static BoxStore boxStore;
 
     @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+
+        //低于5.0需要判断进行适配，不然这个方法在安装完首次打开的时候极有可能ANR（跟你的代码量相关），请自行百度
+        //适配的时候先百度了解Multidex原理，了解App启动流程、四大组件加载顺序，了解Dalvik和ART下apk安装流程
+        //哈哈哈哈，2020年5月27日突然发现今日头条技术团队开源了5.0以下低端机的抖音适配方案，感谢！！
+        //掘金社区：https://juejin.im/post/5ecb6e4a518825430d04121e
+        //https://github.com/bytedance/BoostMultiDex
+        long start = System.currentTimeMillis();
+        Result result = BoostMultiDex.install(this);
+        if (result != null && result.fatalThrowable != null) {
+            Log.e("BMD", "exception occored " + result.fatalThrowable);
+        }
+        Log.i("BMD", "multidex cost time " + (System.currentTimeMillis() - start) + " ms");
+        BoostMultiDex.install(this);
+    }
+
+    @Override
     public void onCreate() {
         super.onCreate();
         context = this;
@@ -67,7 +89,7 @@ public class WDApplication extends Application {
         ARouter.openDebug();
         ARouter.init(this);//阿里路由初始化
 
-        Fresco.initialize(this,getConfigureCaches(this));//图片加载框架初始化
+        Fresco.initialize(this, getConfigureCaches(this));//图片加载框架初始化
 
         //IM或者推送等服务的appliation初始化
         loadModuleApp();
@@ -79,12 +101,12 @@ public class WDApplication extends Application {
      * 但组件化只能有一个Application，而且为了解耦各个模块不能互相引用，
      * 所以只能通过反射方式，把这些module_appliation进行初始化
      */
-    private void loadModuleApp(){
-        for (String moduleImpl : IWDApplication.MODULE_APP){
+    private void loadModuleApp() {
+        for (String moduleImpl : IWDApplication.MODULE_APP) {
             try {
                 Class<?> clazz = Class.forName(moduleImpl);
                 Object obj = clazz.newInstance();
-                if (obj instanceof IWDApplication){
+                if (obj instanceof IWDApplication) {
                     ((IWDApplication) obj).onCreate(this);
                 }
             } catch (ClassNotFoundException e) {

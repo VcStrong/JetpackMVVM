@@ -15,11 +15,6 @@ import com.vc.wd.common.util.UIUtils;
 
 import java.util.List;
 
-/**
- * @author dingtao
- * @date 2019/1/3 23:24
- * qq:1940870847
- */
 public class ImageAdapter extends WDRecyclerAdapter<Object> {
 
     private int sign;//0:普通点击，1自定义
