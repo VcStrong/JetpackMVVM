@@ -14,7 +14,6 @@
 .cxx
 /app/objectbox-models/default.json
 /app/objectbox-models/default.json.bak
-/gradle.properties
 /.idea/gradle.xml
 /gradle/wrapper/gradle-wrapper.jar
 /gradle/wrapper/gradle-wrapper.properties
