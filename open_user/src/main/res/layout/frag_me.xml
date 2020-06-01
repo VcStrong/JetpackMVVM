@@ -5,7 +5,7 @@
     <data>
         <variable
             name="vm"
-            type="com.vc.wd.main.vm.MainViewModel" />
+            type="com.vc.wd.user.vm.UserViewModel" />
     </data>
 
     <RelativeLayout
@@ -274,6 +274,7 @@
                     android:layout_alignTop="@+id/line1"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="-40dp"
+                    android:onClick="@{()->vm.dataShare()}"
                     fresco:roundAsCircle="true" />
 
             </RelativeLayout>

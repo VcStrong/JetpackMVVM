@@ -1,8 +1,12 @@
 package com.vc.wd.main.fragment;
 
 import android.os.Bundle;
+import android.os.Message;
+
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.GridLayoutManager;
+
+import com.vc.wd.common.util.UIUtils;
 import com.vc.wd.main.R;
 import com.vc.wd.main.adapter.CommodityAdpater;
 import com.vc.wd.common.bean.Banner;
@@ -11,15 +15,21 @@ import com.vc.wd.common.core.WDFragment;
 import com.vc.wd.main.adapter.HomeBannerAdapter;
 import com.vc.wd.main.databinding.FragMainBinding;
 import com.vc.wd.common.util.recycleview.SpacingItemDecoration;
+import com.vc.wd.main.vm.HomeViewModel;
 import com.vc.wd.main.vm.MainViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeFragment extends WDFragment<MainViewModel, FragMainBinding> {
+public class HomeFragment extends WDFragment<HomeViewModel, FragMainBinding> {
 
     private CommodityAdpater mHotAdapter, mFashionAdapter, mLifeAdapter;
     private HomeBannerAdapter mBannerAdapter;
+
+    @Override
+    protected HomeViewModel initFragViewModel() {
+        return new HomeViewModel();
+    }
 
     @Override
     protected int getLayoutId() {
@@ -68,6 +78,15 @@ public class HomeFragment extends WDFragment<MainViewModel, FragMainBinding> {
                 mHotAdapter.notifyDataSetChanged();
                 mFashionAdapter.notifyDataSetChanged();
                 mLifeAdapter.notifyDataSetChanged();
+            }
+        });
+
+        viewModel.fragDataShare.observe(this, new Observer<Message>() {
+            @Override
+            public void onChanged(Message message) {
+                if (message.what==100){//提示我的页面发送过来的消息，实现数据共享
+                    UIUtils.showToastSafe((String) message.obj);
+                }
             }
         });
     }

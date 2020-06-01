@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.Fragment;
@@ -28,35 +29,41 @@ import io.objectbox.Box;
  * github VcStrong
  * date 2020/5/28 1:42 PM
  */
-public abstract class WDFragment<VM extends WDViewModel,VDB extends ViewDataBinding> extends Fragment {
+public abstract class WDFragment<VM extends WDFragViewModel,VDB extends ViewDataBinding> extends Fragment {
 
-	protected VM viewModel;
+	protected VM viewModel = initFragViewModel();
 	protected VDB binding;
 
 	protected Box<UserInfo> userInfoBox;
 	protected UserInfo LOGIN_USER;
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
-		// 每次ViewPager要展示该页面时，均会调用该方法获取显示的View
-		long time = System.currentTimeMillis();
+	public void onCreate(@Nullable Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
 		userInfoBox = WDApplication.getBoxStore().boxFor(UserInfo.class);
 		LOGIN_USER = userInfoBox.query()
 				.equal(UserInfo_.status,1)
 				.build().findUnique();
 		ARouter.getInstance().inject(this);
+	}
+
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+		// 每次ViewPager要展示该页面时，均会调用该方法获取显示的View
 		binding = DataBindingUtil.inflate(inflater, getLayoutId(),container,false);
-		//所有布局中dababinding对象变量名称都是vm
-		viewModel = new ViewModelProvider(getActivity()).get(getTClass());
 		binding.setVariable(BR.vm,viewModel);
 		initView(savedInstanceState);
-		LogUtils.e(this.toString()+"页面加载使用："+(System.currentTimeMillis()-time));
 		return binding.getRoot();
 	}
 
-	/**
+	protected abstract VM initFragViewModel();
+
+    public VM getFragViewModel() {
+        return viewModel;
+    }
+
+    /**
 	 * 获取泛型对相应的Class对象
 	 * @return
 	 */
@@ -113,5 +120,4 @@ public abstract class WDFragment<VM extends WDViewModel,VDB extends ViewDataBind
 		ARouter.getInstance().build(path)
 				.navigation(getActivity(),requestCode);
 	}
-
 }

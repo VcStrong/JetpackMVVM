@@ -65,6 +65,12 @@ v3版本绝对让你眼前一新，重新提起兴致，追求适配到4.x，由
 主要目的提升研发-测试-运维运营等部门沟通协作；
 - 新增今日头条-<a href="https://github.com/bytedance/BoostMultiDex.git">抖音团队multidex打包</a>，适配4.x平台加载dex问题，详细请参照WDApplication代码；
 - 拆分请求接口，放到各个相关module中，开发阶段尽量减少多人操作common包。
+
+### mvvm-v3.1
+- 对WDViewModel进行改动，配合WDFragViewModel完成Fragment组件化，你可以仿照open_user模块，完成自己
+的Fragment组件开发。
+- 组合设计模式（Component），通过对子节点初始化赋值，利用MutableLiveData达到共享数据的目的，建议使用
+Message对象，减少代码量，增加功能最大适配性。
  
 
 

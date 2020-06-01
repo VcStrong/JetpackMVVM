@@ -25,4 +25,8 @@ public class Constant {
 
     //-----------open_main---------
 
+    //-----------open_user---------
+    public final static String FRAGMENT_URL_ME = "/user/MeFragment";
+
+    //-----------open_user---------
 }

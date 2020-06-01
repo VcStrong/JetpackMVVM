@@ -5,7 +5,7 @@
     <data>
         <variable
             name="vm"
-            type="com.vc.wd.main.vm.MainViewModel" />
+            type="com.vc.wd.main.vm.HomeViewModel" />
     </data>
 
     <LinearLayout
