@@ -4,10 +4,12 @@ package com.vc.wd.common.core.http;
 import com.vc.wd.common.BuildConfig;
 import com.vc.wd.common.core.WDViewModel;
 
+import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;

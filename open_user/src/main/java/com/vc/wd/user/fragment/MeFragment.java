@@ -1,13 +1,22 @@
-package com.vc.wd.main.fragment;
+package com.vc.wd.user.fragment;
 
 import android.net.Uri;
 import android.os.Bundle;
-import com.vc.wd.main.R;
-import com.vc.wd.common.core.WDFragment;
-import com.vc.wd.main.databinding.FragMeBinding;
-import com.vc.wd.main.vm.MainViewModel;
 
-public class MeFragment extends WDFragment<MainViewModel, FragMeBinding> {
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.vc.wd.common.core.WDFragment;
+import com.vc.wd.common.util.Constant;
+import com.vc.wd.user.R;
+import com.vc.wd.user.databinding.FragMeBinding;
+import com.vc.wd.user.vm.UserViewModel;
+
+@Route(path = Constant.FRAGMENT_URL_ME)
+public class MeFragment extends WDFragment<UserViewModel,FragMeBinding> {
+
+    @Override
+    protected UserViewModel initFragViewModel() {
+        return new UserViewModel();
+    }
 
     @Override
     protected int getLayoutId() {

@@ -17,15 +17,21 @@ import com.vc.wd.main.databinding.FragCircleBinding;
 import com.vc.wd.common.util.Constant;
 import com.vc.wd.common.util.UIUtils;
 import com.vc.wd.common.util.recycleview.SpacingItemDecoration;
+import com.vc.wd.main.vm.CircleViewModel;
 import com.vc.wd.main.vm.MainViewModel;
 
 import java.util.List;
 
-public class CircleFragment extends WDFragment<MainViewModel, FragCircleBinding> implements XRecyclerView.LoadingListener, CircleAdpater.GreatListener {
+public class CircleFragment extends WDFragment<CircleViewModel, FragCircleBinding> implements XRecyclerView.LoadingListener, CircleAdpater.GreatListener {
 
     public static boolean addCircle;//如果添加成功，则为true
 
     private CircleAdpater mCircleAdapter;
+
+    @Override
+    protected CircleViewModel initFragViewModel() {
+        return new CircleViewModel();
+    }
 
     @Override
     protected int getLayoutId() {

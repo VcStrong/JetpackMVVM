@@ -55,5 +55,5 @@ ext {
     //全部都打包，如果只运行模块，请改为false；true则所有模块都参与打包
     allPackage = true
     //需要运行的组件，当allPackage为false的时候，此变量生效，模块名参照settings.gradle中的
-    needPackage = ["open_main","open_login"]
+    needPackage = ["open_main"]
 }
