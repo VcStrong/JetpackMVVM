@@ -5,11 +5,11 @@
 <img src="https://img-blog.csdnimg.cn/20200421193154897.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1ZjU3Ryb25n,size_16,color_FFFFFF,t_70" width="300" align=center /> <img src="https://img-blog.csdnimg.cn/20200421193208122.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1ZjU3Ryb25n,size_16,color_FFFFFF,t_70" width="300" align=center />
 <br/>
 <br/>
-java版mvp参见：https://github.com/VcStrong/RxRetrofitMVPDemo.git<br/>
-kotlin版mvp参见：https://github.com/VcStrong/KotlinMVPDemo.git<br/>
 
 > 注册的密码规则是数字加字母超过8位即可
 > 测试账号：13126965106 密码：111111aa
+
+**阅读此文档前，先尝试运行项目，文档中部分类名需要结合项目中代码进行参考和理解**
 
 ## 1.mvvm-v1 2020.04.20
 这是一个整合架构，所有功能开发都只能在一个module中
@@ -67,12 +67,40 @@ v3版本绝对让你眼前一新，重新提起兴致，追求适配到4.x，由
 - 拆分请求接口，放到各个相关module中，开发阶段尽量减少多人操作common包。
 
 ### mvvm-v3.1
-- 对WDViewModel进行改动，配合WDFragViewModel完成Fragment组件化，你可以仿照open_user模块，完成自己
-的Fragment组件开发。
-- 组合设计模式（Component），通过对子节点初始化赋值，利用MutableLiveData达到共享数据的目的，建议使用
-Message对象，减少代码量，增加功能最大适配性。
- 
+- **Fragment组件化通信怎么实现的，实现原理？**
+    1. 使用组合设计模式，ViewModel（以下简称VM）必须和Activity放在同一个模块，Fragement必须继承WDFragment，因为其中使用自定义FragViewModel（以下简称FVM）抽象类（这个类没有继承VM，是自定义的一个抽象类）；
+    2. Activity中通过Arouter获取其他组件中的Fragment，然后通过此Fragment的方法拿到其绑定的FVM，然后将Activity的VM中LiveData变量传递给FVM，从而实现了数据共享。
 
-### mvvm-v3.2
-- 功能：新增常量生成插件，根据module的gradle配置constant动态生成常量类
-- 使用场景：Arouter多模块之间path常量共享；Intent隐式跳转action/data共享问题
+- **我怎么快速使用Fragment组件化通信？**
+    1. 打开open_user组件，找到UserViewModel类，打开布局文件frag_me.xml，找到dataShare方法，即可快速了解并使用。
+
+>组合设计模式（Component），通过对子节点初始化赋值，利用MutableLiveData达到共享数据的目的，建议使用Message对象，减少代码量，增加功能最大适配性。
+
+- **Arouter中path是常量字符串，当模块众多的时候，需要实现path共享。**
+    1. 新增常量生成插件，VcStrong自己开发的，放到了jitpack.io上，根据module的build.gradle配置constant动态生成常量类。
+    2. 目前支持自定义项目名，报名，类名生成常量类，常量参数生成的时候默认使用追加策略（不是覆盖哦）
+- 如何使用常量插件呢？
+
+```
+在工程的build.gradle中dependencies添加：
+classpath 'com.github.VcStrong:ConstantPlugin:0.0.1'
+```
+```
+在module的build.gradle中使用：
+apply plugin: 'com.vc.constant'//启用常量插件
+constant {
+    enable false//不进行编译，不写的话，默认每次都进行编译，查看build日志
+    moduleName "common"//生成新代码存放的moduleName
+    packageName "com.vc.wd.common.util"//生成的新代码放在哪个包下
+    className "Constant"//生成的常量类名
+    fieldMap = [
+        ACTIVITY_URL_MAIN : '/main/MainActivity',
+        ACTIVITY_URL_ADD_CIRCLE : '/main/AddCircleActivity'
+    ]//属性参数
+}
+```
+
+- **常量插件使用都有哪些场景呢？**
+    1. Arouter多模块之间path常量共享；
+    2. Intent隐式跳转action/data共享问题；
+    3. 只要你需要生成常量类，都可以灵活使用。
