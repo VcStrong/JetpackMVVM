@@ -12,3 +12,15 @@ android {
         }
     }
 }
+
+constant {
+    enable false//不进行编译
+    moduleName "common"//生成新代码存放在的moduleName
+    packageName "com.vc.wd.common.util"//生成的新代码放在哪个包下
+    className "Constant"//生成的常量类名
+    fieldMap = [
+        ACTIVITY_URL_MAIN : '/main/MainActivity',
+        ACTIVITY_URL_ADD_CIRCLE : '/main/AddCircleActivity',
+        ACTIVITY_URL_SET : '/main/SetActivity'
+    ]//属性参数
+}
