@@ -10,8 +10,9 @@ buildscript {
         maven { url 'https://jitpack.io' }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.6.2'
+        classpath 'com.android.tools.build:gradle:4.0.0'
         classpath "io.objectbox:objectbox-gradle-plugin:2.5.1"
+        classpath 'com.github.VcStrong:ConstantPlugin:0.0.1'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -39,19 +40,21 @@ project('app') { p ->
         println "打包分支："+active.branch + "  包名：" +active.applicationId + "  版本：" + active.versionName
         println "==============================================================="
         modules.each() { module ->
-            if (allPackage){//所有模块都打包
-                if (module != p) {
-                    println p.name + "全功能打包，已添加模块:" + module.name
-                    p.dependencies.add("implementation", project(':' + module.name))
-
-                }else{
-                    println p.name + "全模块打包，重复或者不添加的模块:" + module.name
-                }
-            }else{
-                if (needPackage.contains(module.name)) {
+            if (!ignorePackage.contains(module.name)) {
+                if (allPackage) {//所有模块都打包
                     if (module != p) {
-                        println p.name + "组件化打包，清单文件默认采用src/test/AndroidManifest.xml...加载模块:" + module.name
+                        println p.name + "全功能打包，已添加模块:" + module.name
                         p.dependencies.add("implementation", project(':' + module.name))
+
+                    } else {
+                        println p.name + "全模块打包，重复或者不添加的模块:" + module.name
+                    }
+                } else {
+                    if (needPackage.contains(module.name)) {
+                        if (module != p) {
+                            println p.name + "组件化打包，清单文件默认采用src/test/AndroidManifest.xml...加载模块:" + module.name
+                            p.dependencies.add("implementation", project(':' + module.name))
+                        }
                     }
                 }
             }

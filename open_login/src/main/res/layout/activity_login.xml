@@ -109,7 +109,6 @@
                     android:checked="@={vm.remPas}"
                     android:layout_centerVertical="true"
                     android:textColor="@android:color/white"
-                    android:theme="@style/My_CheckBox"
                     android:text="记住密码" />
 
                 <TextView

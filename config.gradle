@@ -56,4 +56,7 @@ ext {
     allPackage = true
     //需要运行的组件，当allPackage为false的时候，此变量生效，模块名参照settings.gradle中的
     needPackage = ["open_main"]
+
+    //组件和全量包都会优先判断此变量中的模块，如果配置了，此模块不参与打包
+    ignorePackage = []
 }
