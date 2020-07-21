@@ -8,8 +8,11 @@ import androidx.lifecycle.MutableLiveData;
 import com.vc.wd.common.core.DataCall;
 import com.vc.wd.common.core.WDViewModel;
 import com.vc.wd.common.core.exception.ApiException;
+import com.vc.wd.common.core.http.NetworkManager;
 import com.vc.wd.common.util.UIUtils;
 import com.vc.wd.login.request.ILoginRequest;
+
+import okhttp3.RequestBody;
 
 public class RegisterViewModel extends WDViewModel<ILoginRequest> {
     public ObservableField<String> mobile = new ObservableField<>();
@@ -33,7 +36,8 @@ public class RegisterViewModel extends WDViewModel<ILoginRequest> {
         }
         dialog.setValue(true);
 
-        request(iRequest.register(m, p), new DataCall<Void>() {
+        RequestBody body = NetworkManager.convertJsonBody(new String[]{"phone","pwd"},new String[]{m,p});
+        request(iRequest.register(body), new DataCall<Void>() {
 
             @Override
             public void success(Void data) {
