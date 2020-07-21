@@ -10,9 +10,12 @@ import com.vc.wd.common.core.DataCall;
 import com.vc.wd.common.core.WDApplication;
 import com.vc.wd.common.core.WDViewModel;
 import com.vc.wd.common.core.exception.ApiException;
+import com.vc.wd.common.core.http.NetworkManager;
 import com.vc.wd.common.util.Constant;
 import com.vc.wd.common.util.UIUtils;
 import com.vc.wd.login.request.ILoginRequest;
+
+import okhttp3.RequestBody;
 
 public class LoginViewModel extends WDViewModel<ILoginRequest> {
 
@@ -53,7 +56,8 @@ public class LoginViewModel extends WDViewModel<ILoginRequest> {
         }
         dialog.setValue(true);
 
-        request(iRequest.login(m, p), new DataCall<UserInfo>() {
+        RequestBody body = NetworkManager.convertJsonBody(new String[]{"phone","pwd"},new String[]{m,p});
+        request(iRequest.login(body), new DataCall<UserInfo>() {
             @Override
             public void success(UserInfo result) {
                 dialog.setValue(false);
