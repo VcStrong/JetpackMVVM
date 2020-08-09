@@ -20,7 +20,7 @@ import com.vc.wd.main.fragment.HomeFragment;
 import com.vc.wd.common.util.Constant;
 import com.vc.wd.main.vm.MainViewModel;
 
-@Route(path = Constant.ACTIVITY_URL_MAIN)
+//@Route(path = Constant.ACTIVITY_URL_MAIN)
 public class MainActivity extends WDActivity<MainViewModel, ActivityMainBinding> {
 
     private HomeFragment homeFragment;

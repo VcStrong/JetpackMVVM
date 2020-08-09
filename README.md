@@ -11,25 +11,29 @@
 
 **阅读此文档前，先尝试运行项目，文档中部分类名需要结合项目中代码进行参考和理解**
 
-## 1.mvvm-v1 2020.04.20
-这是一个整合架构，所有功能开发都只能在一个module中
+## 一、业务
 
-### 1.1 业务功能包含以下：
+### 1. 功能：
 - 登录注册（跳转主页后关闭，已登录用户可直接进入主页）;
 - 仿微信朋友圈，Recyclerview嵌套RecyclerView实现多图布局列表切换（一张横向全屏，二张横向全屏，三张横向全屏，四张分两行且横向全屏）；
 - 发表朋友圈回传值刷新（viewmodel中livedata妙用）；
 - 多图带参数上传；
 - 首页和设置页分别退出登录（intent的flag使用）；
 
-### 1.2 本架构技术功能包含以下：
-- ViewModel在xml页面变量同一命名；
-- Adapter中item的xml如果经常复用但model数据不一致的情况，切勿盲目binding设置，切勿单向页面绑定，请在adapter中手动控件赋值，不要xml-binding；
+## 二、技术及场景
+
+### 1. 技术要点：
+- ViewModel在xml页面变量同一命名"vm"，Activity和Fragment中使用ViewModel有明显的区别，请认真仿照；
+- item的xml被多个Adapter使用，而且model数据（bean）不一致的情况，切勿盲目binding.setVariable设置进行单向页面绑定，请在adapter中手动控件赋值，不要xml-binding；
 - Adapter中复杂控件处理需要大对象，建议灵活使用binding寄存，参见CircleAdapter类
 - ObjectBox快速实现对象存取
 - LiveData对网络请求数据灵活设置，view层基于观察者模式填充
 - viewbinding中onClick，onCheckedChanged等事件使用，其他事件根据Listenter实现方法的名字举一反三
+- conf.gradle对于版本和打包管理，做到清晰-快速的进行组件调试；common包中build.gradle中尽量容纳整个工程所需要的第三方框架/SDK的版本，方便所有模块使用和调试，建议小组主程/架构的同学管理
+- Fragment拆分组件之后的通信方案，参照下方mvvm-v3.1介绍
+- 项目最低兼容4.0.3，因为objectbox最低支持这个版本
 
-### 1.3 框架包含以下
+### 2. 使用的开源框架：
 - <a href="https://developer.android.google.cn/jetpack/androidx">androidx</a>：这个系列的jar包和appcompat.support对立的，参见谷歌官方文档
 - <a href="https://developer.android.google.cn/jetpack">lifecycle-viewmodel+livedata+DataBinding</a>：
 生命周期管理，完全解耦，方便系统内存管理释放，基于观察者模式实现数据更新等等
@@ -45,28 +49,27 @@ Fresco有自己的内存回收机制，但是这个回收阈值没有设置，�
 - <a href="https://github.com/bytedance/BoostMultiDex.git">BoostMultiDex</a>：感谢头条技术团队抖音多dex加载方案
 
 
-## 2.mvvm-v2 质量的提高来自不断地追求
-v2版本在v1基础上进行组件化升级，由于对组件和模块的概念有了更深的了解，参考了网上的组件化教程，实践总结利弊之后，决定自己写一套优秀高效率的组件运行gradle：
-- 公司场景：多模块业务联调，统一运行；
-- 此demo种组件化打包好处：根据gradle配置动态改变模块的引入，分分钟能解决一个模块或者多个模块打包联调；
-- 具体方式如下：
-    1. 项目根目录新建了config.gradle存放系统变量；
-    2. 项目根目录新建了module.gradle存放业务module中build.gradle公用参数，common和app不建议引入(部分重要配置必须写在这两个module中);
-    3. 项目根目录build.gradle使用groovy动态改变app（module）对模块的引入；
-    4. 所有选中的模块可根据自己要求，决定是否需要改变AndroidManifest.xml的引入，仿照open_main模块中的sourceSets；
-    5. 支持多个Module—Application共存，方便处理推送，IM等组件初始化问题
-> 注：请认真查看config.gradle中的变量备注
+## 三、分支更新日志（倒叙）
 
-## 3.mvvm-v3 追风中。
-v3版本绝对让你眼前一新，重新提起兴致，追求适配到4.x，由于ObjectBox框架最低支持4.0.3，所以本项目最低只能支持4.0.3版本机型，
-新增功能处处都能体现代码的奇妙：
-- 重新定义config.gradle中常量：分为SDK_VERSION（不因发布分支改变的常量）和active（跟分支相关的参数）。
-这么做出于对项目在不同阶段不同部门的打包的时候，部分参数需要进行调整，例如：推送key，包名，域名，项目名等；
-主要目的提升研发-测试-运维运营等部门沟通协作；
-- 新增今日头条-<a href="https://github.com/bytedance/BoostMultiDex.git">抖音团队multidex打包</a>，适配4.x平台加载dex问题，详细请参照WDApplication代码；
-- 拆分请求接口，放到各个相关module中，开发阶段尽量减少多人操作common包。
+### 5.master 2020.08.09
+- 首页UI结构更新：MainActivity使用FragmentManager的add hide show；**MainFromViewPagerActivity使用ViewPager+Fragment**；使用的时候只需要注释或者放开@Router注解即可
+> **对于组件aar版本的说明**  
+> **前提/背景/须知：**  
+> 目前此工程可以满足大家开发需要，但随着项目上线，组件越来越多，小组成员不断增多，我们整体工程越来越大，所以我们期望一个工程只包含两部分：app壳工程+自己负责的组件，对于自己不负责的组件只需要在壳工程中引入依赖即可。
+> 需要承认一点，现在包括之前的版本都没有做到**组件开发和维护的灵活性**，所以最近有时间会继续改进一版，做到一个工程只包含两部分：app壳工程+自己负责的组件；
+> 使用了现在或以前版本的小伙伴也不要伤心，组件改进不涉及任何业务功能，所以你依旧可以根据下方提供的技术方案对自己的项目改进。
+>
+> **技术方案流程：**
+> 1. 建议大家一步到位，不要本地打包拷贝libs，请自行搭建公司私有仓库（本地或者远程服务器均可），然后配置gradle发布脚本，发布aar到私服上；
+> 2. 请主程/小组长在app的build.gradle中dependencies引入所有的aar，在config.gradle做好aar版本管理，视情况删除工程中build.gradle的打包流程（可保留，应对后续组件功能扩展）；
+> 3. 将整理好的工程clone多份，删除.git，在settings.gradle中删除不需要的组件名称，然后在每份源码中保留不同的组件，重新上传仓库，完成改版。
+>
+> **关于工具类改进的一些想法：**  
+> 考虑了很多次是否改进，最终个人决定不改进，留给各位小伙伴完成，目前common中util工具类比较少，而且只使用了其中的某几个，大家可以根据需求自行增加，
+> 另外比较重要的Log/File工具类强烈建议根据业务和Android版本做深度改进，推荐大家在github中搜索一下相关的工具类工程。
+>
 
-### mvvm-v3.1
+### 4. mvvm-v3.1 2020.06.12
 - **Fragment组件化通信怎么实现的，实现原理？**
     1. 使用组合设计模式，ViewModel（以下简称VM）必须和Activity放在同一个模块，Fragement必须继承WDFragment，因为其中使用自定义FragViewModel（以下简称FVM）抽象类（这个类没有继承VM，是自定义的一个抽象类）；
     2. Activity中通过Arouter获取其他组件中的Fragment，然后通过此Fragment的方法拿到其绑定的FVM，然后将Activity的VM中LiveData变量传递给FVM，从而实现了数据共享。
@@ -81,7 +84,6 @@ v3版本绝对让你眼前一新，重新提起兴致，追求适配到4.x，由
     2. 目前支持自定义项目名，报名，类名生成常量类，常量参数生成的时候默认使用追加策略（不是覆盖哦）
 
 - **如何使用常量插件呢？**
-
 ```
 在工程的build.gradle中dependencies添加：
 classpath 'com.github.VcStrong:ConstantPlugin:0.0.1'
@@ -106,5 +108,27 @@ constant {
     2. Intent隐式跳转action/data共享问题；
     3. 只要你需要生成常量类，都可以灵活使用。
 
-> V3.2本周六日计划增加组件版本，对于大项目或者成熟项目迭代或者重构期间，小组成员根据module组件进行排期，当某一期任务完成并上线，则此module封版；我们并不需要每次引入module源码，只是需要每次引入aar依赖即可。
- 
+### 3.mvvm-v3 追风中。
+v3版本绝对让你眼前一新，重新提起兴致，追求适配到4.x，由于ObjectBox框架最低支持4.0.3，所以本项目最低只能支持4.0.3版本机型，
+新增功能处处都能体现代码的奇妙：
+- 重新定义config.gradle中常量：分为SDK_VERSION（不因发布分支改变的常量）和active（跟分支相关的参数）。
+这么做出于对项目在不同阶段不同部门的打包的时候，部分参数需要进行调整，例如：推送key，包名，域名，项目名等；
+主要目的提升研发-测试-运维运营等部门沟通协作；
+- 新增今日头条-<a href="https://github.com/bytedance/BoostMultiDex.git">抖音团队multidex打包</a>，适配4.x平台加载dex问题，详细请参照WDApplication代码；
+- 拆分请求接口，放到各个相关module中，开发阶段尽量减少多人操作common包。
+
+### 2.mvvm-v2 质量的提高来自不断地追求
+v2版本在v1基础上进行组件化升级，由于对组件和模块的概念有了更深的了解，参考了网上的组件化教程，实践总结利弊之后，决定自己写一套优秀高效率的组件运行gradle：
+- 公司场景：多模块业务联调，统一运行；
+- 此demo种组件化打包好处：根据gradle配置动态改变模块的引入，分分钟能解决一个模块或者多个模块打包联调；
+- 具体方式如下：
+    1. 项目根目录新建了config.gradle存放系统变量；
+    2. 项目根目录新建了module.gradle存放业务module中build.gradle公用参数，common和app不建议引入(部分重要配置必须写在这两个module中);
+    3. 项目根目录build.gradle使用groovy动态改变app（module）对模块的引入；
+    4. 所有选中的模块可根据自己要求，决定是否需要改变AndroidManifest.xml的引入，仿照open_main模块中的sourceSets；
+    5. 支持多个Module—Application共存，方便处理推送，IM等组件初始化问题
+> 注：请认真查看config.gradle中的变量备注
+
+### 1.mvvm-v1 2020.04.20
+这是一个整合架构，所有功能开发都只能在一个module中
+

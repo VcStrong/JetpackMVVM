@@ -39,7 +39,7 @@ task clean(type: Delete) {
 }
 def modules = getSubprojects()
 //def modules = getAllprojects()
-// app 是主工程模块名
+// app 是主工程模块名，组件化打包，如果后续使用了拆分aar后，可视情况删除，参考README.md中的日志说明
 project('app') { p ->
     p.afterEvaluate {
         println "==============================================================="

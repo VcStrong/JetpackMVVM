@@ -2,6 +2,7 @@
     package="com.vc.wd.main" >
     <application>
         <activity android:name="com.vc.wd.main.activity.MainActivity"/>
+        <activity android:name="com.vc.wd.main.activity.MainFromViewPagerActivity"/>
         <activity android:name="com.vc.wd.main.activity.SetActivity"/>
         <activity android:name="com.vc.wd.main.activity.AddCircleActivity"/>
     </application>
