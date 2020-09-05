@@ -52,7 +52,7 @@ Fresco有自己的内存回收机制，但是这个回收阈值没有设置，�
 ## 三、分支更新日志（倒叙）
 
 ### 6.master 2020.09.05
-- 新增scope插件，这是一个idea插件，需要打开idea/studio进行plugin插件安装，安装之后会生成两个入口，1.VCS提交面板commit message增加小文本按钮；2.idea/studio面板增加VVScopeTree树形结构面板；插件作用是为了标准化commit message文案，规范每一次commit message的描述。
+- 新增scope插件，在gct文件夹中，这是一个idea插件，需要打开idea/studio进行plugin插件安装，安装之后会生成两个入口，1.VCS提交面板commit message增加小文本按钮；2.idea/studio面板增加VVScopeTree树形结构面板；插件作用是为了标准化commit message文案，规范每一次commit message的描述。
 - **scope插件是什么呢？怎么使用？**
   1. 参见这位外国大兄弟：https://github.com/MobileTribe/commit-template-idea-plugin.git
   2. 在此基础上，根据公司项目情况，我又开发了Tree树形结构功能，安装插件之后，会在idea或studio主页上增加一个VVScopeTree，方便所有模块业务进行管理。
