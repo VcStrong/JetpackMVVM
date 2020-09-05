@@ -47,6 +47,7 @@ public class NetworkManager {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);//打印请求参数，请求结果
 
+        //OKHttp最大同时请求5个不同域名
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .addInterceptor(interceptor)
                 .connectTimeout(5, TimeUnit.SECONDS)
