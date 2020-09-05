@@ -15,6 +15,16 @@
     {
       "title": "user",
       "description": "用户信息模块"
+    },
+    {
+      "title": "common",
+      "description": "公共基础包",
+      "sub": [
+        {
+          "title": "http",
+          "description": "http网络工具"
+        }
+      ]
     }
   ]
 }
