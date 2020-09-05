@@ -1,0 +1,20 @@
+{
+  "bean": [
+    {
+      "title": "main",
+      "description": "首页模块"
+    },
+    {
+      "title": "login",
+      "description": "登录模块"
+    },
+    {
+      "title": "push",
+      "description": "推送模块"
+    },
+    {
+      "title": "user",
+      "description": "用户信息模块"
+    }
+  ]
+}
