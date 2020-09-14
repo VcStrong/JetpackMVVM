@@ -20,6 +20,9 @@ import com.vc.wd.main.fragment.HomeFragment;
 import com.vc.wd.common.util.Constant;
 import com.vc.wd.main.vm.MainViewModel;
 
+/**
+ * 本页面使用FragmentManager的add/hide/show，如果要使用ViewPager+Fragment，请参照MainFromViewPagerActivity
+ */
 //@Route(path = Constant.ACTIVITY_URL_MAIN)
 public class MainActivity extends WDActivity<MainViewModel, ActivityMainBinding> {
 
@@ -66,7 +69,7 @@ public class MainActivity extends WDActivity<MainViewModel, ActivityMainBinding>
             @Override
             public void onChanged(Message message) {
                 if (message.what==100){
-                    binding.bottomMenu.check(R.id.home_btn);
+                    binding.homeBtn.setChecked(true);
                 }
             }
         });
