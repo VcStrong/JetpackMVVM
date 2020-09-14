@@ -50,10 +50,12 @@ public abstract class WDFragment<VM extends WDFragViewModel,VDB extends ViewData
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-		// 每次ViewPager要展示该页面时，均会调用该方法获取显示的View
-		binding = DataBindingUtil.inflate(inflater, getLayoutId(),container,false);
-		binding.setVariable(BR.vm,viewModel);
-		initView(savedInstanceState);
+		if (binding==null) {
+			// 每次ViewPager要展示该页面时，均会调用该方法获取显示的View
+			binding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false);
+			binding.setVariable(BR.vm, viewModel);
+			initView(savedInstanceState);
+		}
 		return binding.getRoot();
 	}
 

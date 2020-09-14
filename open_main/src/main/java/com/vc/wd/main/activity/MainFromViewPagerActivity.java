@@ -26,6 +26,9 @@ import com.vc.wd.main.vm.MainFromViewPagerViewModel;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+/**
+ * 使用ViewPager+Fragment；如果首页不要ViewPager，只是用FragmentManager的add/hide/show，那么请参照MainActivity
+ */
 @Route(path = Constant.ACTIVITY_URL_MAIN)
 public class MainFromViewPagerActivity extends WDActivity<MainFromViewPagerViewModel, ActivityMainViewPagerBinding> {
 
@@ -129,7 +132,7 @@ public class MainFromViewPagerActivity extends WDActivity<MainFromViewPagerViewM
             @Override
             public void onChanged(Message message) {
                 if (message.what == 100) {
-                    binding.bottomMenu.check(R.id.home_btn);
+                    viewModel.cId.setValue(R.id.home_btn);
                 }
             }
         });
