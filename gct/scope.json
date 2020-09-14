@@ -23,6 +23,11 @@
         {
           "title": "http",
           "description": "http网络工具"
+        },
+        {
+          "title": "sql",
+          "description": "数据库",
+          "sub": []
         }
       ]
     }
