@@ -47,9 +47,9 @@ public abstract class WDViewModel<R> extends ViewModel implements LifecycleObser
     public final static int RESPONSE_TYPE_DEFAULT = 0;
     public final static int RESPONSE_TYPE_SDK_BD = 100;////例：这个为请求百度的接口，接口结构为另外一种
 
-    //负责每个页面中的dialog弹出框隐藏和展示
+    //负责每个页面中的loading-dialog隐藏和展示
     public MutableLiveData<Boolean> dialog = new MutableLiveData<>();
-    //关闭页面
+    //关闭页面，用于调用Activity的finish()方法
     public MutableLiveData<Void> finish = new MutableLiveData<>();
     //如果上个页面使用了startActivityForResult，则本页面回传值需要使用此参数进行回传值的操作
     public MutableLiveData<Void> forResult = new MutableLiveData<>();
@@ -69,35 +69,22 @@ public abstract class WDViewModel<R> extends ViewModel implements LifecycleObser
         }
     }
 
-    private List<WDFragViewModel> fragViewModels = new ArrayList<>();
-
     /**
-     * 组合Fragment的viewmodel和寄存Activity的viewModel
+     * 将Activity的ViewModel中几个关键参数下发到FragmentViewModel中
      * @param fragvm
      */
     public void addFragViewModel(WDFragViewModel fragvm) {
         if (fragvm==null)
             return;
-        fragViewModels.add(fragvm);
-        if (isCreated){//如果activity已经创建，fragment后续加入
-            fragvm.init(dialog,finish,forResult,fragDataShare,userInfoBox,LOGIN_USER);
-            fragvm.create();
-        }
+        fragvm.init(dialog, finish, forResult, fragDataShare);
     }
-
-    private boolean isCreated;
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     protected void create(){
-        isCreated = true;
         userInfoBox = WDApplication.getBoxStore().boxFor(UserInfo.class);
         LOGIN_USER = userInfoBox.query()
                 .equal(UserInfo_.status,1)
                 .build().findUnique();
-        for (WDFragViewModel fragvm:fragViewModels) {
-            fragvm.init(dialog,finish,forResult,fragDataShare,userInfoBox,LOGIN_USER);
-            fragvm.create();
-        }
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)

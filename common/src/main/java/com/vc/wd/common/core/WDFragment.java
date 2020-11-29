@@ -45,6 +45,7 @@ public abstract class WDFragment<VM extends WDFragViewModel,VDB extends ViewData
 				.equal(UserInfo_.status,1)
 				.build().findUnique();
 		ARouter.getInstance().inject(this);
+		getActivity().getLifecycle().addObserver(viewModel);
 	}
 
 	@Override
@@ -57,6 +58,12 @@ public abstract class WDFragment<VM extends WDFragViewModel,VDB extends ViewData
 			initView(savedInstanceState);
 		}
 		return binding.getRoot();
+	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		getActivity().getLifecycle().removeObserver(viewModel);
 	}
 
 	protected abstract VM initFragViewModel();

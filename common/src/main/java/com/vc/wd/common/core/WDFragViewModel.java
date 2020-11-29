@@ -33,7 +33,7 @@ import io.reactivex.schedulers.Schedulers;
  * github VcStrong
  * date 2020/5/28 1:42 PM
  */
-public abstract class WDFragViewModel<R> {
+public abstract class WDFragViewModel<R> implements LifecycleObserver {
 
     public final static int REQUEST_TYPE_DEFAULT = 0;//默认IRquest
     public final static int REQUEST_TYPE_APP_ORDER = 1;//例：这个为订单请求接口，由于接口类中方法太多，所以写了另外一个业务接口
@@ -65,16 +65,39 @@ public abstract class WDFragViewModel<R> {
         }
     }
 
-    public void init(MutableLiveData<Boolean> dialog, MutableLiveData<Void> finish, MutableLiveData<Void> forResult, MutableLiveData<Message> fragDataShare,Box<UserInfo> userInfoBox, UserInfo LOGIN_USER) {
+    public void init(MutableLiveData<Boolean> dialog, MutableLiveData<Void> finish, MutableLiveData<Void> forResult, MutableLiveData<Message> fragDataShare) {
         this.dialog = dialog;
         this.finish = finish;
         this.forResult = forResult;
         this.fragDataShare = fragDataShare;
-        this.userInfoBox = userInfoBox;
-        this.LOGIN_USER = LOGIN_USER;
     }
 
-    protected void create(){
+    @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
+    protected void create() {
+        userInfoBox = WDApplication.getBoxStore().boxFor(UserInfo.class);
+        LOGIN_USER = userInfoBox.query()
+                .equal(UserInfo_.status,1)
+                .build().findUnique();
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_START)
+    protected void start() {
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
+    protected void resume() {
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
+    protected void pause() {
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
+    protected void stop() {
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+    protected void destroy() {
     }
 
     /**
