@@ -16,6 +16,7 @@ import com.vc.wd.common.bean.UserInfo;
 import com.vc.wd.common.bean.UserInfo_;
 import com.vc.wd.common.core.exception.ApiException;
 import com.vc.wd.common.core.http.NetworkManager;
+import com.vc.wd.common.util.logger.Logger;
 
 import java.lang.reflect.ParameterizedType;
 
@@ -26,14 +27,16 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
+
 /**
  * desc 每个Activity对应一个viewmodel，又或者多个Fragment同Activity共享一个viewmodel，
- *      负责拿到model(请求网络或者封装)，通过Livedata完成页面数据更新
+ * 负责拿到model(请求网络或者封装)，通过Livedata完成页面数据更新
  * author VcStrong
  * github VcStrong
  * date 2020/5/28 1:42 PM
  */
 public abstract class WDFragViewModel<R> implements LifecycleObserver {
+    private final Logger logger = Logger.createLogger(getClass());
 
     public final static int REQUEST_TYPE_DEFAULT = 0;//默认IRquest
     public final static int REQUEST_TYPE_APP_ORDER = 1;//例：这个为订单请求接口，由于接口类中方法太多，所以写了另外一个业务接口
@@ -58,14 +61,15 @@ public abstract class WDFragViewModel<R> implements LifecycleObserver {
 
     protected R iRequest;
 
-    public WDFragViewModel(){
+    public WDFragViewModel() {
         Class<R> tClass = getTClass();
-        if (!tClass.equals(Void.class)){
-            iRequest = NetworkManager.instance().create(getRequestType(),tClass);
+        if (!tClass.equals(Void.class)) {
+            iRequest = NetworkManager.instance().create(getRequestType(), tClass);
         }
     }
 
     public void init(MutableLiveData<Boolean> dialog, MutableLiveData<Void> finish, MutableLiveData<Void> forResult, MutableLiveData<Message> fragDataShare) {
+        logger.i("init");
         this.dialog = dialog;
         this.finish = finish;
         this.forResult = forResult;
@@ -74,30 +78,36 @@ public abstract class WDFragViewModel<R> implements LifecycleObserver {
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     protected void create() {
+        logger.i("Frag-VM create");
         userInfoBox = WDApplication.getBoxStore().boxFor(UserInfo.class);
         LOGIN_USER = userInfoBox.query()
-                .equal(UserInfo_.status,1)
+                .equal(UserInfo_.status, 1)
                 .build().findUnique();
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     protected void start() {
+        logger.i("Frag-VM start");
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     protected void resume() {
+        logger.i("Frag-VM resume");
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
     protected void pause() {
+        logger.i("Frag-VM pause");
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
     protected void stop() {
+        logger.i("Frag-VM stop");
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     protected void destroy() {
+        logger.i("Frag-VM destroy");
     }
 
     /**
@@ -109,7 +119,7 @@ public abstract class WDFragViewModel<R> implements LifecycleObserver {
     }
 
     /**
-     * @param path 传送Activity的
+     * @param path   传送Activity的
      * @param bundle
      */
     public void intentByRouter(String path, Bundle bundle) {
@@ -118,23 +128,25 @@ public abstract class WDFragViewModel<R> implements LifecycleObserver {
                 .navigation();
     }
 
-    public void finish(){
+    public void finish() {
         finish.setValue(null);
     }
 
     /**
      * 获取泛型对相应的Class对象
+     *
      * @return
      */
-    private Class<R>  getTClass(){
+    private Class<R> getTClass() {
         //返回表示此 Class 所表示的实体（类、接口、基本类型或 void）的直接超类的 Type。
-        ParameterizedType type = (ParameterizedType)this.getClass().getGenericSuperclass();
+        ParameterizedType type = (ParameterizedType) this.getClass().getGenericSuperclass();
         //返回表示此类型实际类型参数的 Type 对象的数组()，想要获取第二个泛型的Class，所以索引写1
-        return (Class)type.getActualTypeArguments()[0];//<T>
+        return (Class) type.getActualTypeArguments()[0];//<T>
     }
 
     /**
      * 请求数据，所有网络操作请使用本方法
+     *
      * @param observable
      * @param dataCall
      * @return
@@ -160,6 +172,7 @@ public abstract class WDFragViewModel<R> implements LifecycleObserver {
      * 此方法用来确定采用的Rtrofit中baseUrl
      * 由于Retrofit特性，baseUrl不能随意改动，当大项目拥有
      * 多个域名控制不同业务的时候，则需要不同的Retrofit
+     *
      * @TODO 可以根据需要在子类中重写
      */
     protected int getRequestType() {
@@ -169,6 +182,7 @@ public abstract class WDFragViewModel<R> implements LifecycleObserver {
     /**
      * 返回值类型，方便不同接口返回数据结构不同的情况，参见{@link #getConsumer(DataCall)}
      * 应对大项目多数据结构
+     *
      * @TODO 可以根据需要在子类中重写
      */
     protected int getResponseType() {
@@ -176,40 +190,40 @@ public abstract class WDFragViewModel<R> implements LifecycleObserver {
     }
 
     /**
+     * @param
+     * @return
      * @author: yintao
      * @date: 2020/4/20 11:56 PM
      * @method
-     * @param
-     * @return
      * @description 根据返回值{@link #getResponseType()}灵活改变Consumer或者自己直接重写都可以
      */
-    protected Consumer getConsumer(final DataCall dataCall){
-        if (getResponseType()==RESPONSE_TYPE_SDK_BD) {//如果整个项目中只有一个百度的接口，那么不建议修改基类Presenter，请重写getConsumer方法就可以。
+    protected Consumer getConsumer(final DataCall dataCall) {
+        if (getResponseType() == RESPONSE_TYPE_SDK_BD) {//如果整个项目中只有一个百度的接口，那么不建议修改基类Presenter，请重写getConsumer方法就可以。
             return new Consumer<BDResult>() {
                 @Override
                 public void accept(BDResult result) throws Exception {
-                    if (result.getCode()==0) {
+                    if (result.getCode() == 0) {
                         dataCall.success(result.getData());
-                    }else{
-                        dataCall.fail(new ApiException(String.valueOf(result.getCode()),result.getMsg()));
+                    } else {
+                        dataCall.fail(new ApiException(String.valueOf(result.getCode()), result.getMsg()));
                     }
                 }
             };
-        }else{
+        } else {
             return new Consumer<Result>() {
                 @Override
                 public void accept(Result result) throws Exception {
                     if (result.getStatus().equals("0000")) {
                         dataCall.success(result.getResult());
-                    }else{
-                        dataCall.fail(new ApiException(result.getStatus(),result.getMessage()));
+                    } else {
+                        dataCall.fail(new ApiException(result.getStatus(), result.getMessage()));
                     }
                 }
             };
         }
     }
 
-    public MutableLiveData<Boolean> getDialog(){
+    public MutableLiveData<Boolean> getDialog() {
         return dialog;
     }
 }

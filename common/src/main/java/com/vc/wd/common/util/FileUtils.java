@@ -9,9 +9,10 @@ import android.os.Build;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
-
+import android.util.Log;
 
 import com.vc.wd.common.core.WDApplication;
+import com.vc.wd.common.util.logger.Logger;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -35,8 +36,7 @@ import java.util.zip.ZipOutputStream;
  */
 public class FileUtils {
 
-    public static final String LC_INFO = "lc_info";// 应用一些基本信息或者每个页面需要的信息
-    public static final String LC_SET = "lc_set";// 应用的设置信息
+    private static final Logger logger = Logger.createLogger(FileUtils.class);
 
     private static final int BUFF_SIZE = 1024 * 1024;
 
@@ -268,7 +268,7 @@ public class FileUtils {
                 srcFile.delete();
             }
         } catch (Exception e) {
-            LogUtils.e(e);
+            logger.e(Log.getStackTraceString(e));
             return false;
         }
         return true;
@@ -285,7 +285,7 @@ public class FileUtils {
             File f = new File(path);
             return f.exists() && f.canWrite();
         } catch (Exception e) {
-            LogUtils.e(e);
+            logger.e(Log.getStackTraceString(e));
             return false;
         }
     }
@@ -299,7 +299,7 @@ public class FileUtils {
             Runtime runtime = Runtime.getRuntime();
             runtime.exec(command);
         } catch (Exception e) {
-            LogUtils.e(e);
+            logger.e(Log.getStackTraceString(e));
         }
     }
 
@@ -324,7 +324,7 @@ public class FileUtils {
                 File parentFile = new File(f.getParent());
                 parentFile.mkdirs();
                 int count = -1;
-                byte[] buffer = new byte[1024*10];
+                byte[] buffer = new byte[1024 * 10];
                 fos = new FileOutputStream(f);
                 while ((count = is.read(buffer)) != -1) {
                     fos.write(buffer, 0, count);
@@ -332,7 +332,7 @@ public class FileUtils {
                 res = true;
             }
         } catch (Exception e) {
-            LogUtils.e(e);
+            logger.e(Log.getStackTraceString(e));
         } finally {
             IOUtils.close(fos);
             IOUtils.close(is);
@@ -368,7 +368,7 @@ public class FileUtils {
                 res = true;
             }
         } catch (Exception e) {
-            LogUtils.e(e);
+            logger.e(Log.getStackTraceString(e));
         } finally {
             IOUtils.close(raf);
         }
@@ -413,7 +413,7 @@ public class FileUtils {
                 out.flush();
             }
         } catch (Exception e) {
-            LogUtils.e(e);
+            logger.e(Log.getStackTraceString(e));
             return false;
         } finally {
             IOUtils.close(in);
@@ -455,7 +455,7 @@ public class FileUtils {
                     Bout.close();
                     out.close();
                 }
-                LogUtils.e("解压成功");
+                logger.i("解压成功");
                 Bin.close();
                 Zin.close();
                 return true;
@@ -620,7 +620,7 @@ public class FileUtils {
                     return path;
                 }
             }
-        }else {
+        } else {
             // 以 file:// 开头的
             if (ContentResolver.SCHEME_FILE.equals(uri.getScheme())) {
                 path = uri.getPath();

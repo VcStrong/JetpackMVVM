@@ -12,6 +12,9 @@ import android.media.ExifInterface;
 import android.media.MediaScannerConnection;
 import android.media.ThumbnailUtils;
 import android.net.Uri;
+import android.util.Log;
+
+import com.vc.wd.common.util.logger.Logger;
 
 import java.io.Closeable;
 import java.io.File;
@@ -21,7 +24,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 
 public class IOUtils {
-
+    private static final Logger logger = Logger.createLogger(IOUtils.class);
     private final static int IMAGE_AVATAR_SIZE = 720;
 
     /**
@@ -32,7 +35,7 @@ public class IOUtils {
             try {
                 io.close();
             } catch (IOException e) {
-                LogUtils.e(e);
+                logger.e(Log.getStackTraceString(e));
             }
         }
         return true;
@@ -50,7 +53,7 @@ public class IOUtils {
         final Options options = new Options();
         options.inJustDecodeBounds = true;
         BitmapFactory.decodeFile(fileUrl, options);
-        LogUtils.i("outWidth:" + options.outWidth + "     outHeight:"
+        logger.i("outWidth:" + options.outWidth + "     outHeight:"
                 + options.outHeight);
         if (options.outWidth <= IMAGE_AVATAR_SIZE && options.outHeight <= IMAGE_AVATAR_SIZE) {// 如果宽高都小于规定尺寸
             bitmap = BitmapFactory.decodeFile(fileUrl, options);
@@ -60,7 +63,7 @@ public class IOUtils {
             options.inSampleSize = Integer.parseInt(""
                     + new BigDecimal(((double) imageMaxLength / IMAGE_AVATAR_SIZE) + "")
                     .setScale(0, BigDecimal.ROUND_HALF_UP));// 得到图片缩放比例
-            LogUtils.i("options.inSampleSize: " + options.inSampleSize);
+            logger.i("options.inSampleSize: " + options.inSampleSize);
         }
         options.inJustDecodeBounds = false;
         /**
@@ -72,7 +75,7 @@ public class IOUtils {
         length = length > 720 ? 720 : length;
         bitmap = ThumbnailUtils.extractThumbnail(bitmap, length, length);// 得到裁剪后的图片
         int degree = readPictureDegree(fileUrl);
-        LogUtils.i("degree:" + degree);
+        logger.i("degree:" + degree);
         // 旋转图片 动作
         Matrix matrix = new Matrix();
         matrix.postRotate(degree);

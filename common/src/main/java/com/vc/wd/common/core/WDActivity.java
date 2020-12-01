@@ -4,27 +4,24 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.MediaStore;
+import android.os.PersistableBundle;
 import android.view.KeyEvent;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.vc.wd.common.BR;
 import com.vc.wd.common.util.FileUtils;
-import com.vc.wd.common.util.LogUtils;
+import com.vc.wd.common.util.logger.Logger;
 
 import java.lang.reflect.ParameterizedType;
-import java.util.List;
 
 
 /**
@@ -33,8 +30,8 @@ import java.util.List;
  * github VcStrong
  * date 2020/5/28 1:42 PM
  */
-public abstract class WDActivity<VM extends WDViewModel,VDB extends ViewDataBinding> extends AppCompatActivity {
-
+public abstract class WDActivity<VM extends WDViewModel, VDB extends ViewDataBinding> extends AppCompatActivity {
+    private final Logger logger = Logger.createLogger(getClass());
     public final static int PHOTO = 0;// 相册选取
     public final static int CAMERA = 1;// 拍照
     public Dialog mLoadDialog;// 加载框
@@ -49,9 +46,10 @@ public abstract class WDActivity<VM extends WDViewModel,VDB extends ViewDataBind
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        logger.i("onCreate");
         super.onCreate(savedInstanceState);
         //打印堆栈ID
-        LogUtils.e("getTaskId = " + getTaskId());
+        logger.i("getTaskId = " + getTaskId());
         initLoad();
         setContentView(getLayoutId());
         ARouter.getInstance().inject(this);
@@ -73,7 +71,7 @@ public abstract class WDActivity<VM extends WDViewModel,VDB extends ViewDataBind
 
         binding = DataBindingUtil.setContentView(this, getLayoutId());
         //所有布局中dababinding对象变量名称都是vm
-        binding.setVariable(BR.vm,viewModel);
+        binding.setVariable(BR.vm, viewModel);
         binding.executePendingBindings();//立即更新UI
 //        binding.setLifecycleOwner(this);
         getLifecycle().addObserver(viewModel);
@@ -81,20 +79,65 @@ public abstract class WDActivity<VM extends WDViewModel,VDB extends ViewDataBind
     }
 
     @Override
+    protected void onNewIntent(Intent intent) {
+        logger.i("onNewIntent");
+        super.onNewIntent(intent);
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState, @NonNull PersistableBundle outPersistentState) {
+        logger.i("onSaveInstanceState");
+        super.onSaveInstanceState(outState, outPersistentState);
+    }
+
+    @Override
+    protected void onRestart() {
+        logger.i("onRestart");
+        super.onRestart();
+    }
+
+    @Override
+    protected void onStart() {
+        logger.i("onStart");
+        super.onStart();
+        mForegroundActivity = this;
+    }
+
+    @Override
+    protected void onResume() {
+        logger.i("onResume");
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        logger.i("onPause");
+        super.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        logger.i("onStop");
+        super.onStop();
+    }
+
+    @Override
     protected void onDestroy() {
+        logger.i("onDestroy");
         super.onDestroy();
         getLifecycle().removeObserver(viewModel);
     }
 
     /**
      * 获取泛型对相应的Class对象
+     *
      * @return
      */
-    private Class<VM>  getTClass(){
+    private Class<VM> getTClass() {
         //返回表示此 Class 所表示的实体（类、接口、基本类型或 void）的直接超类的 Type。
-        ParameterizedType type = (ParameterizedType)this.getClass().getGenericSuperclass();
+        ParameterizedType type = (ParameterizedType) this.getClass().getGenericSuperclass();
         //返回表示此类型实际类型参数的 Type 对象的数组()，想要获取第二个泛型的Class，所以索引写1
-        return (Class)type.getActualTypeArguments()[0];//<T>
+        return (Class) type.getActualTypeArguments()[0];//<T>
     }
 
     /**
@@ -132,12 +175,6 @@ public abstract class WDActivity<VM extends WDViewModel,VDB extends ViewDataBind
         viewModel.dialog.setValue(false);
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        mForegroundActivity = this;
-    }
-
     /**
      * 获取当前处于前台的activity
      */
@@ -158,7 +195,7 @@ public abstract class WDActivity<VM extends WDViewModel,VDB extends ViewDataBind
             return fileName;
         } else if (requestCode == PHOTO) {
             Uri uri = data.getData();
-            String img_path = FileUtils.getFilePathByUri(this,uri);
+            String img_path = FileUtils.getFilePathByUri(this, uri);
             return img_path;
         }
         return null;
