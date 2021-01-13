@@ -1,0 +1,18 @@
+//发布本地或者远程服务器等脚本都放在此类中
+apply plugin: 'maven'
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            // 发布到本地路径进行测试
+            repository(url:uri('../repo'))
+            pom.groupId = active.applicationId  //groupId ，自行定义，一般是包名
+            pom.artifactId = 'common' //artifactId ，自行定义
+            pom.version = 'latest' //version 版本号
+        }
+    }
+    doLast {
+        // 删除生成的build/lib文件夹
+        delete libsDirName
+    }
+}

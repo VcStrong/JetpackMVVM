@@ -1,5 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'io.objectbox'
+// 发布到本地测试用
+apply from: 'publish.gradle'
 
 android {
     compileSdkVersion SDK_VERSION.compileSdkVersion
