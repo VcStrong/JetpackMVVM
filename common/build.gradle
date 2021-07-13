@@ -1,5 +1,4 @@
 apply plugin: 'com.android.library'
-apply plugin: 'io.objectbox'
 // 发布到本地测试用
 apply from: 'publish.gradle'
 
@@ -43,6 +42,7 @@ android {
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar'])
     api 'androidx.appcompat:appcompat:1.1.0'
+    api 'com.google.android.material:material:1.1.0'
     api 'androidx.recyclerview:recyclerview:1.0.0'
     api 'androidx.constraintlayout:constraintlayout:1.1.3'
 
@@ -67,14 +67,19 @@ dependencies {
     api 'io.reactivex.rxjava2:rxandroid:2.1.0'
 
     //arouter
-    api 'com.alibaba:arouter-api:1.4.0'
-    annotationProcessor 'com.alibaba:arouter-compiler:1.2.1'
+    api 'com.alibaba:arouter-api:1.5.2'
+    annotationProcessor 'com.alibaba:arouter-compiler:1.5.2'
 
     api 'com.youth.banner:banner:2.0.10'
     api 'com.facebook.fresco:fresco:1.11.0'
     api 'com.jcodecraeer:xrecyclerview:1.5.9'
     //objectbox数据库
-    api "io.objectbox:objectbox-android:2.5.1"
+    debugApi "io.objectbox:objectbox-android-objectbrowser:2.9.1"
+    releaseApi "io.objectbox:objectbox-android:2.9.1"
 
     api 'com.github.tbruyelle:rxpermissions:0.10.2'
+    //工具类
+    api 'com.blankj:utilcodex:1.30.5'
 }
+
+apply plugin: 'io.objectbox'

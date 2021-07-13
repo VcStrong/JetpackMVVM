@@ -2,6 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
+        <import type="android.view.View"/>
         <variable
             name="vm"
             type="com.vc.wd.main.vm.MainFromViewPagerViewModel" />
@@ -23,6 +24,15 @@
             android:layout_alignParentBottom="true">
 
         </androidx.viewpager.widget.ViewPager>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:onClick="@{() -> vm.debug()}"
+            android:text="debug设置"
+            android:visibility="@{vm.debug?View.VISIBLE:View.GONE}" />
 
         <ImageView
             android:layout_width="match_parent"

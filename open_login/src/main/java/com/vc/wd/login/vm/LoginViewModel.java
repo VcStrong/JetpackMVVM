@@ -24,8 +24,8 @@ public class LoginViewModel extends WDViewModel<ILoginRequest> {
     public ObservableField<String> pas = new ObservableField<>();
     public MutableLiveData<Boolean> pasVis = new MutableLiveData<>();
 
-    public void pasVisibility(){
-        pasVis.setValue(pasVis.getValue()==null?false:!pasVis.getValue());
+    public void pasVisibility() {
+        pasVis.setValue(pasVis.getValue() == null ? false : !pasVis.getValue());
     }
 
     @Override
@@ -37,6 +37,10 @@ public class LoginViewModel extends WDViewModel<ILoginRequest> {
             mobile.set(WDApplication.getShare().getString("mobile", ""));
             pas.set(WDApplication.getShare().getString("pas", ""));
         }
+    }
+
+    public void debug() {
+        intentByRouter(Constant.ACTIVITY_URL_DEBUG);
     }
 
     public void login() {
@@ -56,7 +60,7 @@ public class LoginViewModel extends WDViewModel<ILoginRequest> {
         }
         dialog.setValue(true);
 
-        RequestBody body = NetworkManager.convertJsonBody(new String[]{"phone","pwd"},new String[]{m,p});
+        RequestBody body = NetworkManager.convertJsonBody(new String[]{"phone", "pwd"}, new String[]{m, p});
         request(iRequest.login(body), new DataCall<UserInfo>() {
             @Override
             public void success(UserInfo result) {
@@ -75,7 +79,7 @@ public class LoginViewModel extends WDViewModel<ILoginRequest> {
         });
     }
 
-    public void register(){
+    public void register() {
         intentByRouter(Constant.ACTIVITY_URL_REGISTER);
     }
 }

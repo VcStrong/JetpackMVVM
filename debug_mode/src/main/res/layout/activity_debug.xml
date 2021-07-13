@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.vc.wd.debug.vm.DebugViewModel" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{vm.classList}" />
+
+            <Switch
+                android:id="@+id/ue_tool"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="@={vm.uetoolCheck}"
+                android:onClick="@{()->vm.uetool()}"
+                android:padding="15dp"
+                android:text="UETool" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</layout>

@@ -66,7 +66,7 @@ public abstract class WDViewModel<R> extends ViewModel implements LifecycleObser
 
     public WDViewModel() {
         Class<R> tClass = getTClass();
-        if (!tClass.equals(Void.class)) {
+        if (tClass != null && !tClass.equals(Void.class)) {
             iRequest = NetworkManager.instance().create(getRequestType(), tClass);
         }
     }
@@ -145,9 +145,13 @@ public abstract class WDViewModel<R> extends ViewModel implements LifecycleObser
      */
     private Class<R> getTClass() {
         //返回表示此 Class 所表示的实体（类、接口、基本类型或 void）的直接超类的 Type。
-        ParameterizedType type = (ParameterizedType) this.getClass().getGenericSuperclass();
-        //返回表示此类型实际类型参数的 Type 对象的数组()，想要获取第二个泛型的Class，所以索引写1
-        return (Class) type.getActualTypeArguments()[0];//<T>
+        if (this.getClass().getGenericSuperclass() instanceof ParameterizedType) {
+            ParameterizedType type = (ParameterizedType) this.getClass().getGenericSuperclass();
+            //返回表示此类型实际类型参数的 Type 对象的数组()，想要获取第二个泛型的Class，所以索引写1
+            return (Class) type.getActualTypeArguments()[0];//<T>
+        } else {
+            return null;
+        }
     }
 
     /**

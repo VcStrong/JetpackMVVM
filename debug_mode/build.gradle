@@ -1,0 +1,21 @@
+apply from: '../module.gradle'
+
+android {
+
+    defaultConfig {
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+}
+
+dependencies {
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+//    UEtool
+    debugImplementation 'me.ele:uetool:1.2.9'
+    releaseImplementation 'me.ele:uetool-no-op:1.2.9'
+    // if you want to show more attrs about Fresco's DraweeView
+    debugImplementation 'me.ele:uetool-fresco:1.2.9'
+}

@@ -15,7 +15,7 @@ import com.facebook.common.util.ByteConstants;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.imagepipeline.cache.MemoryCacheParams;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
-import com.vc.wd.common.bean.MyObjectBox;
+import com.vc.wd.common.MyObjectBox;
 
 import io.objectbox.BoxStore;
 

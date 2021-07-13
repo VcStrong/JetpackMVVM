@@ -29,4 +29,9 @@ public class Constant {
     public final static String FRAGMENT_URL_ME = "/user/MeFragment";
 
     //-----------open_user---------
+
+    //-----------open_debug---------
+    public final static String ACTIVITY_URL_DEBUG = "/debug/DebugActivity";
+
+    //-----------open_debug---------
 }
