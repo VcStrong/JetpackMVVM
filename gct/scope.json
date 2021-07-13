@@ -39,6 +39,11 @@
           "description": "日志工具"
         }
       ]
+    },
+    {
+      "title": "debug",
+      "description": "debug调试",
+      "sub": []
     }
   ]
 }
