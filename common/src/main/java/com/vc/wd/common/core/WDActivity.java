@@ -51,7 +51,8 @@ public abstract class WDActivity<VM extends WDViewModel, VDB extends ViewDataBin
         //打印堆栈ID
         logger.i("getTaskId = " + getTaskId());
         initLoad();
-        setContentView(getLayoutId());
+        binding = DataBindingUtil.setContentView(this, getLayoutId());
+        setContentView(binding.getRoot());
         ARouter.getInstance().inject(this);
         viewModel = new ViewModelProvider(this).get(getTClass());
         viewModel.dialog.observe(this, new Observer<Boolean>() {
@@ -69,7 +70,6 @@ public abstract class WDActivity<VM extends WDViewModel, VDB extends ViewDataBin
             }
         });
 
-        binding = DataBindingUtil.setContentView(this, getLayoutId());
         //所有布局中dababinding对象变量名称都是vm
         binding.setVariable(BR.vm, viewModel);
         binding.executePendingBindings();//立即更新UI
